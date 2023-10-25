@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefenceManager : MonoBehaviour
+public class DefenceManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Defensive structures constructor
 
-    // Update is called once per frame
-    void Update()
+    private int defenceDamage;
+    private int defenceHealth;
+    private int defenceCost;
+
+    // Properties
+    public int DefenceDamage
     {
-        
+        get { return defenceDamage; }
+        set { defenceDamage = value; }
+    }
+    public int DefenceHealth
+    {
+        get { return defenceHealth; }
+        set { defenceHealth = value; }
+    }
+    public int DefenceCost
+    {
+        get { return defenceCost; }
+        set { defenceCost = value; }
     }
 }
