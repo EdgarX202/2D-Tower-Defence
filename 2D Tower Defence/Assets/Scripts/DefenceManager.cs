@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DefenceManager
 {
-    // Defensive structures constructor
-
     private int defenceDamage;
     private int defenceHealth;
     private int defenceCost;
@@ -25,5 +23,13 @@ public class DefenceManager
     {
         get { return defenceCost; }
         set { defenceCost = value; }
+    }
+
+    // Constructor
+    public DefenceManager(int damage, int health, int cost)
+    {
+        DefenceDamage = damage;
+        DefenceHealth = health;
+        DefenceCost = cost;
     }
 }
