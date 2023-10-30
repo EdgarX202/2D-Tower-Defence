@@ -10,7 +10,7 @@ public class Tower : MonoBehaviour
 
     private float nextTimeToShoot;
 
-    private GameObject currentTarget;
+    public GameObject currentTarget;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    protected virtual void Shoot()
     {   
        Enemy enemyScript = currentTarget.GetComponent<Enemy>();
 
