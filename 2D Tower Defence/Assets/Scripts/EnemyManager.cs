@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemyManager
 {
+   [SerializeField] private float enemySpeed;
     private int enemyDamage;
-    private int enemyHealth;
+   [SerializeField] private int enemyHealth;
     private int enemyShield;
 
     // Properties
+    public float EnemySpeed
+    {
+        get { return enemySpeed; } 
+        set { enemySpeed = value; }
+    }
     public int EnemyDamage
     { 
         get { return enemyDamage; }
@@ -26,10 +32,11 @@ public class EnemyManager
     }
 
     // Constructor
-    public EnemyManager(int damage, int health, int shield)
+    public EnemyManager(int damage, int health, int shield, float speed)
     {
         EnemyDamage = damage;
         EnemyHealth = health;
         EnemyShield = shield;
+        EnemySpeed = speed;
     }
 }

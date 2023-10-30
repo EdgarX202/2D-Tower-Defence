@@ -5,20 +5,28 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    // Tile reference
     [SerializeField] private GameObject mapTile;
+    [SerializeField] private Color pathColour;
+    [SerializeField] private Color startColour;
+    [SerializeField] private Color endColour;
+    // Map dimensions
     [SerializeField] private int mapWidth;
     [SerializeField] private int mapHeight;
+    // Lists
+    public static List<GameObject> mapTiles = new();
+    public static List<GameObject> pathTiles = new();
 
-    private List<GameObject> mapTiles = new();
-    private List<GameObject> pathTiles = new();
+    public static GameObject startTile;
+    public static GameObject endTile;
 
+    // Bool
     private bool reachedX = false;
     private bool reachedY = false;
+    // Tile index
     private GameObject currentTile;
     private int currentTileIndex;
     private int nextTileIndex;
-
-    public Color pathColour;
 
     private void Start()
     {
@@ -29,14 +37,13 @@ public class MapGenerator : MonoBehaviour
     {
         List<GameObject> edgeTiles = new();
 
+        // i = top left tile, i < top right tile
         for (int i = mapWidth * (mapHeight - 1); i < mapWidth * mapHeight; i++) 
         {
             edgeTiles.Add(mapTiles[i]);
         }
-
         return edgeTiles;
     }
-
     private List<GameObject> getBottomEdgeTiles()
     {
         List<GameObject> edgeTiles = new();
@@ -45,7 +52,6 @@ public class MapGenerator : MonoBehaviour
         {
             edgeTiles.Add(mapTiles[i]);
         }
-
         return edgeTiles;
     }
 
@@ -55,6 +61,10 @@ public class MapGenerator : MonoBehaviour
         currentTileIndex = mapTiles.IndexOf(currentTile);
         nextTileIndex = currentTileIndex - mapWidth;
         currentTile = mapTiles[nextTileIndex];
+    }
+
+    private void MoveUp()
+    { 
     }
 
     private void MoveLeft()
@@ -89,9 +99,6 @@ public class MapGenerator : MonoBehaviour
 
         List<GameObject> topEdgeTiles = getTopEdgeTiles();
         List<GameObject> bottomEdgeTiles = getBottomEdgeTiles();
-
-        GameObject startTile;
-        GameObject endTile;
 
         int rand1 = Random.Range(0, mapWidth);
         int rand2 = Random.Range(0, mapWidth);
@@ -145,5 +152,8 @@ public class MapGenerator : MonoBehaviour
         {
             obj.GetComponent<SpriteRenderer>().color = pathColour;
         }    
+
+        startTile.GetComponent<SpriteRenderer>().color = startColour;
+        endTile.GetComponent<SpriteRenderer>().color = endColour;
     }
 }
