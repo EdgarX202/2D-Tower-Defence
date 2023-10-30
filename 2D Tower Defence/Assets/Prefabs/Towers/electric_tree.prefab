@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2594259983598410162}
   - component: {fileID: 5526810929950548017}
+  - component: {fileID: -7038041231054436488}
   m_Layer: 0
   m_Name: electric_tree
   m_TagString: Untagged
@@ -84,3 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-7038041231054436488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7848973584365614352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7759599c65ccc47897a4f296c6f946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  damage: 25
+  timeBetweenShots: 1

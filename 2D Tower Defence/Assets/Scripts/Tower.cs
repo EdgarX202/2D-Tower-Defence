@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private float range;
-    private float damage;
-    private float timeBetweenShots;
+    [SerializeField] private float range;
+    [SerializeField] private float damage;
+    [SerializeField] private float timeBetweenShots;
 
     private float nextTimeToShoot;
 
@@ -26,12 +26,15 @@ public class Tower : MonoBehaviour
         // Calculate distance between tower and current enemy
         foreach (GameObject enemy in Enemies.enemies)
         {
-            float _distance = (transform.position - enemy.transform.position).magnitude;
-
-            if(_distance < distance)
+            if(enemy != null)
             {
-                distance = _distance;
-                currentNearestEnemy = enemy;
+                float _distance = (transform.position - enemy.transform.position).magnitude;
+
+                if (_distance < distance)
+                {
+                    distance = _distance;
+                    currentNearestEnemy = enemy;
+                }
             }
         }
 
