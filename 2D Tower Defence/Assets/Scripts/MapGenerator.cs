@@ -122,7 +122,7 @@ public class MapGenerator : MonoBehaviour
         currentTile = startTile;
 
         // First move when the game starts
-        MoveLeft();
+       // MoveLeft();
 
         while (!reachedX)
         {
