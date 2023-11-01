@@ -13,26 +13,26 @@ public class MapGenerator : MonoBehaviour
     // Map dimensions
     [SerializeField] private int mapWidth;
     [SerializeField] private int mapHeight;
-    // Lists
-    public static List<GameObject> mapTiles = new();
-    public static List<GameObject> pathTiles = new();
-
-    public static GameObject startTile;
-    public static GameObject endTile;
-
-    // Bool
-    private bool reachedX = false;
-    private bool reachedY = false;
     // Tile index
     private GameObject currentTile;
     private int currentTileIndex;
     private int nextTileIndex;
+    // Bool
+    private bool reachedX = false;
+    private bool reachedY = false;
+    // Lists
+    public static List<GameObject> mapTiles = new();
+    public static List<GameObject> pathTiles = new();
+    
+    public static GameObject startTile;
+    public static GameObject endTile;
 
     private void Start()
     {
         GenerateMap();   
     }
 
+    // Create a list for getting top tiles
     private List<GameObject> getTopEdgeTiles()
     {
         List<GameObject> edgeTiles = new();
@@ -44,10 +44,12 @@ public class MapGenerator : MonoBehaviour
         }
         return edgeTiles;
     }
+    // Create a list for getting bottom tiles
     private List<GameObject> getBottomEdgeTiles()
     {
         List<GameObject> edgeTiles = new();
 
+        // i = bottom left tile < bottom right
         for (int i = 0; i < mapWidth; i++)
         {
             edgeTiles.Add(mapTiles[i]);
@@ -85,7 +87,15 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap()
     {
-        for(int y = 0; y < mapHeight; y++) 
+        Vector2 spawnLocation = new Vector2(10, 10);
+
+        foreach (GameObject tile in mapTiles)
+        {
+            tile.transform.position += (Vector3)spawnLocation;
+        }
+
+
+        for (int y = 0; y < mapHeight; y++) 
         { 
             for(int x = 0; x < mapWidth; x++) 
             {
