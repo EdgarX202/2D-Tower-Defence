@@ -59,14 +59,14 @@ public class MapGenerator : MonoBehaviour
 
     // Move path tile Down,Up,Left,Right
     // REFACTORING NEEDED ----------------------------<<
-    private void MoveDown()
+    private void MoveLeft()
     {
         pathTiles.Add(currentTile);
         currentTileIndex = mapTiles.IndexOf(currentTile);
         nextTileIndex = currentTileIndex - mapHeight;
         currentTile = mapTiles[nextTileIndex];
     }
-    private void MoveUp()
+    private void MoveRight()
     {
         // Add current tile to list of path tiles
         pathTiles.Add(currentTile);
@@ -77,14 +77,14 @@ public class MapGenerator : MonoBehaviour
         // Set the next tile to be the current tile
         currentTile = mapTiles[nextTileIndex];
     }
-    private void MoveLeft()
+    private void MoveDown()
     {
         pathTiles.Add(currentTile);
         currentTileIndex = mapTiles.IndexOf(currentTile);
         nextTileIndex = currentTileIndex-1;
         currentTile = mapTiles[nextTileIndex];
     }
-    private void MoveRight()
+    private void MoveUp()
     {
         pathTiles.Add(currentTile);
         currentTileIndex = mapTiles.IndexOf(currentTile);
@@ -94,6 +94,8 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap()
     {
+        int loopCount = 0;
+
         // Generate the map tiles
         for (int x = 0; x < mapWidth; x++) 
         { 
@@ -110,7 +112,7 @@ public class MapGenerator : MonoBehaviour
         List<GameObject> rightEdgeTiles = GetRightEdgeTiles();
 
         // Get a random tile from each side
-        int leftRand = Random.Range(0, mapHeight);
+        int leftRand = Random.Range(0, mapHeight+1);
         int rightRand = Random.Range(0, mapHeight);
 
         // Make random tiles start/end markers
@@ -119,9 +121,8 @@ public class MapGenerator : MonoBehaviour
 
         currentTile = startTile;
 
-        MoveDown();
-
-        int loopCount = 0;
+        // First move when the game starts
+        MoveLeft();
 
         while (!reachedX)
         {
@@ -133,11 +134,11 @@ public class MapGenerator : MonoBehaviour
             }
             if (currentTile.transform.position.x > endTile.transform.position.x)
             {
-                MoveDown();
+                MoveLeft();
             }
             else if (currentTile.transform.position.x < endTile.transform.position.x)
             {
-                MoveUp();
+                MoveRight();
             }
             else
             {
@@ -149,11 +150,11 @@ public class MapGenerator : MonoBehaviour
         {
             if (currentTile.transform.position.y > endTile.transform.position.y)
             {
-                MoveLeft();
+                MoveDown();
             }
             else if (currentTile.transform.position.y < endTile.transform.position.y)
             {
-                MoveRight();
+                MoveUp();
             }
             else
             {
@@ -163,6 +164,7 @@ public class MapGenerator : MonoBehaviour
 
         pathTiles.Add(endTile);
 
+        // Change colours for path/end/start tiles
         foreach (GameObject obj in pathTiles)
         {
             obj.GetComponent<SpriteRenderer>().color = pathColour;
