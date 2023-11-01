@@ -87,17 +87,9 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap()
     {
-        Vector2 spawnLocation = new Vector2(10, 10);
-
-        foreach (GameObject tile in mapTiles)
-        {
-            tile.transform.position += (Vector3)spawnLocation;
-        }
-
-
-        for (int y = 0; y < mapHeight; y++) 
+        for (int x = 0; x < mapWidth; x++) 
         { 
-            for(int x = 0; x < mapWidth; x++) 
+            for(int y = 0; y < mapHeight; y++) 
             {
                 GameObject newTile = Instantiate(mapTile);
 
@@ -110,8 +102,8 @@ public class MapGenerator : MonoBehaviour
         List<GameObject> topEdgeTiles = getTopEdgeTiles();
         List<GameObject> bottomEdgeTiles = getBottomEdgeTiles();
 
-        int rand1 = Random.Range(0, mapWidth);
-        int rand2 = Random.Range(0, mapWidth);
+        int rand1 = Random.Range(0, mapHeight);
+        int rand2 = Random.Range(0, mapHeight);
 
         startTile = topEdgeTiles[rand1];
         endTile = bottomEdgeTiles[rand2];
@@ -122,39 +114,39 @@ public class MapGenerator : MonoBehaviour
 
         int loopCount = 0;
 
-        while (!reachedX)
-        {
-            loopCount++;
-            if(loopCount > 100)
-            {
-                Debug.Log("Loop ran too long! Broke out of it!");
-                break;
-            }
-            if (currentTile.transform.position.x > endTile.transform.position.x)
-            {
-                MoveLeft();
-            }
-            else if (currentTile.transform.position.x < endTile.transform.position.x)
-            {
-                MoveRight();
-            }
-            else
-            {
-                reachedX = true;
-            }
-        }
+        //while (!reachedX)
+        //{
+        //    loopCount++;
+        //    if(loopCount > 100)
+        //    {
+        //        Debug.Log("Loop ran too long! Broke out of it!");
+        //        break;
+        //    }
+        //    if (currentTile.transform.position.x > endTile.transform.position.x)
+        //    {
+        //        MoveLeft();
+        //    }
+        //    else if (currentTile.transform.position.x < endTile.transform.position.x)
+        //    {
+        //        MoveRight();
+        //    }
+        //    else
+        //    {
+        //        reachedX = true;
+        //    }
+        //}
 
-        while (!reachedY)
-        {
-            if(currentTile.transform.position.y > endTile.transform.position.y)
-            {
-                MoveDown();
-            }
-            else
-            {
-                reachedY = true;
-            }
-        }
+        //while (!reachedY)
+        //{
+        //    if(currentTile.transform.position.y > endTile.transform.position.y)
+        //    {
+        //        MoveDown();
+        //    }
+        //    else
+        //    {
+        //        reachedY = true;
+        //    }
+        //}
 
         pathTiles.Add(endTile);
 
