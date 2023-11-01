@@ -33,7 +33,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     // Create a list for getting top tiles
-    private List<GameObject> getTopEdgeTiles()
+    private List<GameObject> GetLeftEdgeTiles()
     {
         List<GameObject> edgeTiles = new();
 
@@ -45,7 +45,7 @@ public class MapGenerator : MonoBehaviour
         return edgeTiles;
     }
     // Create a list for getting bottom tiles
-    private List<GameObject> getBottomEdgeTiles()
+    private List<GameObject> GetRightEdgeTiles()
     {
         List<GameObject> edgeTiles = new();
 
@@ -57,18 +57,26 @@ public class MapGenerator : MonoBehaviour
         return edgeTiles;
     }
 
+    // Move path tile Down,Up,Left,Right
+    // REFACTORING NEEDED ----------------------------<<
     private void MoveDown()
     {
         pathTiles.Add(currentTile);
         currentTileIndex = mapTiles.IndexOf(currentTile);
-        nextTileIndex = currentTileIndex - mapWidth;
+        nextTileIndex = currentTileIndex - mapHeight;
         currentTile = mapTiles[nextTileIndex];
     }
-
     private void MoveUp()
-    { 
+    {
+        // Add current tile to list of path tiles
+        pathTiles.Add(currentTile);
+        // Get the index of the current tile
+        currentTileIndex = mapTiles.IndexOf(currentTile);
+        // Calculate the index of the next tile
+        nextTileIndex = currentTileIndex + mapHeight;
+        // Set the next tile to be the current tile
+        currentTile = mapTiles[nextTileIndex];
     }
-
     private void MoveLeft()
     {
         pathTiles.Add(currentTile);
@@ -76,7 +84,6 @@ public class MapGenerator : MonoBehaviour
         nextTileIndex = currentTileIndex-1;
         currentTile = mapTiles[nextTileIndex];
     }
-
     private void MoveRight()
     {
         pathTiles.Add(currentTile);
@@ -87,26 +94,28 @@ public class MapGenerator : MonoBehaviour
 
     private void GenerateMap()
     {
+        // Generate the map tiles
         for (int x = 0; x < mapWidth; x++) 
         { 
             for(int y = 0; y < mapHeight; y++) 
             {
                 GameObject newTile = Instantiate(mapTile);
-
                 mapTiles.Add(newTile);
-
                 newTile.transform.position = new Vector2(x, y);
             }
         }
 
-        List<GameObject> topEdgeTiles = getTopEdgeTiles();
-        List<GameObject> bottomEdgeTiles = getBottomEdgeTiles();
+        // Lists for getting side edge tiles
+        List<GameObject> leftEdgeTiles = GetLeftEdgeTiles();
+        List<GameObject> rightEdgeTiles = GetRightEdgeTiles();
 
-        int rand1 = Random.Range(0, mapHeight);
-        int rand2 = Random.Range(0, mapHeight);
+        // Get a random tile from each side
+        int leftRand = Random.Range(0, mapHeight);
+        int rightRand = Random.Range(0, mapHeight);
 
-        startTile = topEdgeTiles[rand1];
-        endTile = bottomEdgeTiles[rand2];
+        // Make random tiles start/end markers
+        startTile = leftEdgeTiles[leftRand];
+        endTile = rightEdgeTiles[rightRand];
 
         currentTile = startTile;
 
@@ -114,39 +123,43 @@ public class MapGenerator : MonoBehaviour
 
         int loopCount = 0;
 
-        //while (!reachedX)
-        //{
-        //    loopCount++;
-        //    if(loopCount > 100)
-        //    {
-        //        Debug.Log("Loop ran too long! Broke out of it!");
-        //        break;
-        //    }
-        //    if (currentTile.transform.position.x > endTile.transform.position.x)
-        //    {
-        //        MoveLeft();
-        //    }
-        //    else if (currentTile.transform.position.x < endTile.transform.position.x)
-        //    {
-        //        MoveRight();
-        //    }
-        //    else
-        //    {
-        //        reachedX = true;
-        //    }
-        //}
+        while (!reachedX)
+        {
+            loopCount++;
+            if (loopCount > 100)
+            {
+                Debug.Log("Loop ran too long! Broke out of it!");
+                break;
+            }
+            if (currentTile.transform.position.x > endTile.transform.position.x)
+            {
+                MoveDown();
+            }
+            else if (currentTile.transform.position.x < endTile.transform.position.x)
+            {
+                MoveUp();
+            }
+            else
+            {
+                reachedX = true;
+            }
+        }
 
-        //while (!reachedY)
-        //{
-        //    if(currentTile.transform.position.y > endTile.transform.position.y)
-        //    {
-        //        MoveDown();
-        //    }
-        //    else
-        //    {
-        //        reachedY = true;
-        //    }
-        //}
+        while (!reachedY)
+        {
+            if (currentTile.transform.position.y > endTile.transform.position.y)
+            {
+                MoveLeft();
+            }
+            else if (currentTile.transform.position.y < endTile.transform.position.y)
+            {
+                MoveRight();
+            }
+            else
+            {
+                reachedY = true;
+            }
+        }
 
         pathTiles.Add(endTile);
 
