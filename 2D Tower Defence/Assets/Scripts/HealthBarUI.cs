@@ -6,6 +6,7 @@ using TMPro;
 
 public class HealthBarUI : MonoBehaviour
 {
+    // Reference to PlayerHealth class
     public PlayerHealth playerHealth;
 
     public Image healthBar;
@@ -13,6 +14,7 @@ public class HealthBarUI : MonoBehaviour
 
     private void Update()
     {
+        // Creating health bar fill and text
         healthBar.fillAmount = playerHealth.GetCurrentPlayerHealth() / playerHealth.startingHealth;
         healthBarText.text = "Health: " + Mathf.Floor(playerHealth.GetCurrentPlayerHealth()) + "/" + playerHealth.startingHealth;
     }

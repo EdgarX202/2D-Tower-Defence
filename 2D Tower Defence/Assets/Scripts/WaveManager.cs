@@ -6,13 +6,14 @@ public class WaveManager : MonoBehaviour
 {
     public GameObject basicEnemy;
 
+    // Floats
     public float timeBetweenWaves;
     public float timeBeforeRoundStart;
     public float time;
-
+    // Bools
     public bool isRoundGoing;
     public bool isIntermission;
-    public bool isStarOfRound;
+    public bool isStartOfRound;
 
     public int round;
 
@@ -20,7 +21,7 @@ public class WaveManager : MonoBehaviour
     {
         isRoundGoing = false;
         isIntermission = false;
-        isStarOfRound = true;
+        isStartOfRound = true;
 
         time = Time.time + timeBeforeRoundStart;
 
@@ -32,10 +33,12 @@ public class WaveManager : MonoBehaviour
         StartCoroutine("ISpawnEnemies");
     }
 
+    // Interface for spawning enemies
     IEnumerator ISpawnEnemies()
     {
         for (int i = 0; i < round; i++)
         {
+            // Instantiate new enemies on the start tile
             GameObject newEnemy = Instantiate(basicEnemy, MapGenerator.startTile.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }
@@ -44,11 +47,11 @@ public class WaveManager : MonoBehaviour
     private void Update()
     {
         // State machine
-        if(isStarOfRound)
+        if(isStartOfRound)
         {
             if(Time.time >= time)
             {
-                isStarOfRound = false;
+                isStartOfRound = false;
                 isRoundGoing = true;
 
                 SpawnEnemies();

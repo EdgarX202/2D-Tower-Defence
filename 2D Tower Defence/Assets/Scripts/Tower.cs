@@ -14,13 +14,17 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
+        /*
+         * Time.time = total amount of time since the game started
+         * Time.deltaTime = the amount of timee took to render last frame
+         */
         nextTimeToShoot = Time.time;
     }
 
+    // Update which is the nearest enemy for the tower to target
     private void UpdateNearestEnemy()
     {
         GameObject currentNearestEnemy = null;
-
         float distance = Mathf.Infinity;
 
         // Calculate distance between tower and current enemy
@@ -37,7 +41,7 @@ public class Tower : MonoBehaviour
                 }
             }
         }
-
+        // If enemy distance is in range, make it the current target
         if (distance <= range)
         {
             currentTarget = currentNearestEnemy;
@@ -51,7 +55,6 @@ public class Tower : MonoBehaviour
     protected virtual void Shoot()
     {   
        Enemy enemyScript = currentTarget.GetComponent<Enemy>();
-
        enemyScript.TakeDamage(damage);
     }
 

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BarrelRotation : MonoBehaviour
 {
+    // Reference to tower class
+    public Tower tower;
+
     public Transform pivot;
     public Transform barrel;
-
-    public Tower tower;
 
     private void Update()
     {
@@ -15,13 +16,14 @@ public class BarrelRotation : MonoBehaviour
         {
             if (tower.currentTarget != null)
             {
-                // Move towards enemy
+                // Relative position of the targets position - barrels pivot position
                 Vector2 relative = tower.currentTarget.transform.position - pivot.position;
 
+                // Calculate the angle between barrels and desired rotation
                 float angle = Mathf.Atan2(relative.y, relative.x) * Mathf.Rad2Deg;
 
+                // Set new rotation
                 Vector3 newRotation = new Vector3 (0, 0, angle);
-
                 pivot.localRotation = Quaternion.Euler (newRotation);
             }
         }

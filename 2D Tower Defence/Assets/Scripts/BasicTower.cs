@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class BasicTower : Tower
 {
+    /*
+     * This class inherits from Tower class
+     */
+
     public Transform pivot;
     public Transform barrel;
+
     public GameObject bullet;
 
     protected override void Shoot()

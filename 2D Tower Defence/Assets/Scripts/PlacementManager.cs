@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class PlacementManager : MonoBehaviour
 {
+    // Reference to ShopManager
     public ShopManager shopManager;
 
-    public GameObject basicTowerObj;
-
-    private GameObject currentTowerPlacing;
-
-    private GameObject dummyPlacement;
-
-    public Camera cam;
-
-    private GameObject hoverTile;
-
+    // Layer masks
     public LayerMask mask;
     public LayerMask towerMask;
 
+    // Bools
     public bool isBuilding;
+    public bool towerOnSlot = false;
+
+    // Camera
+    public Camera cam;
+
+    // GameObjects
+    public GameObject basicTowerObj;
+    private GameObject currentTowerPlacing;
+    private GameObject dummyPlacement;
+    private GameObject hoverTile;
 
     private void Start()
     {
-        
     }
 
     public Vector2 GetMousePosition()
@@ -54,22 +56,24 @@ public class PlacementManager : MonoBehaviour
 
     public bool CheckForTower()
     {
-        bool towerOnSlot = false;
-
         Vector2 mousePosition = GetMousePosition();
-
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, new Vector2(0, 0), 0.1f, towerMask, -100, 100);
 
+        // if hit collider is not null, means there is a tower
         if(hit.collider != null )
         {
             towerOnSlot = true;
         }
-
         return towerOnSlot;
     }
 
     public void PlaceBuilding()
     {
+        /* If a mouse hovers on tile that is not null
+         * and if there is no tower there
+         * and if a player has enough money
+         * then build the tower on that tile
+         */
         if(hoverTile != null)
         {
             if(CheckForTower() == false)
@@ -85,6 +89,7 @@ public class PlacementManager : MonoBehaviour
                 }
                 else
                 {
+                    // If a player has not enough money, let them know!
                     Debug.Log("Insufficient funds!");
                 }
             }
@@ -96,28 +101,20 @@ public class PlacementManager : MonoBehaviour
         isBuilding = true;
 
         currentTowerPlacing = towerToBuild;
-
+        // Dummy is just an image of a tower with nothing attached to it
         dummyPlacement = Instantiate(currentTowerPlacing);
 
-        if(dummyPlacement.GetComponent<Tower>() != null)
-        {
-            Destroy(dummyPlacement.GetComponent<Tower>());
-        }
-
-        if(dummyPlacement.GetComponent<BarrelRotation>() != null)
-        {
-            Destroy(dummyPlacement.GetComponent<BarrelRotation>());
-        }
+        // Destroy the dummy when a real tower is being built
+        if(dummyPlacement.GetComponent<Tower>() != null) { Destroy(dummyPlacement.GetComponent<Tower>()); }
+        if(dummyPlacement.GetComponent<BarrelRotation>() != null) { Destroy(dummyPlacement.GetComponent<BarrelRotation>()); }
     }
 
     public void EndBuilding()
     {
+        // Destroy dummy when builbing is finished
         isBuilding = false;
 
-        if(dummyPlacement != null)
-        {
-            Destroy(dummyPlacement);
-        }
+        if(dummyPlacement != null) { Destroy(dummyPlacement); }
     }
 
     public void Update()
@@ -133,7 +130,7 @@ public class PlacementManager : MonoBehaviour
                     dummyPlacement.transform.position = hoverTile.transform.position;
                 }
             }
-
+            // Place tower on click first mouse button
             if(Input.GetButtonDown("Fire1"))
             {
                 PlaceBuilding();

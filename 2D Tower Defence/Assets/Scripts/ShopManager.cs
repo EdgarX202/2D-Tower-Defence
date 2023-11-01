@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    // Reference to CurrencyManager
     public CurrencyManager currencyManager;
 
     public GameObject basicTowerPrefab;
-
     public int basicTowerCost;
 
+    // Tower prices ------- add more above with more towers ---------
     public int GetTowerCost(GameObject towerPrefab)
     {
         int cost = 0;
@@ -22,11 +23,13 @@ public class ShopManager : MonoBehaviour
         return cost;
     }
 
+    // Take the money away when buying
     public void BuyTower(GameObject towerPrefab)
     {
         currencyManager.RemoveMoney(GetTowerCost(towerPrefab));
     }
 
+    // Check if player has more money than the tower price is
     public bool CanBuyTower(GameObject towerPrefab)
     {
         int cost = GetTowerCost(towerPrefab);

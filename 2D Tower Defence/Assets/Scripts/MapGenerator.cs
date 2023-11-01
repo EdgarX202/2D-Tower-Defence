@@ -11,8 +11,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Color startColour;
     [SerializeField] private Color endColour;
     // Map dimensions
-    [SerializeField] private int mapWidth;
-    [SerializeField] private int mapHeight;
+    private int mapWidth = 17;
+    private int mapHeight = 7;
     // Tile index
     private GameObject currentTile;
     private int currentTileIndex;
@@ -165,10 +165,7 @@ public class MapGenerator : MonoBehaviour
         pathTiles.Add(endTile);
 
         // Change colours for path/end/start tiles
-        foreach (GameObject obj in pathTiles)
-        {
-            obj.GetComponent<SpriteRenderer>().color = pathColour;
-        }    
+        foreach (GameObject obj in pathTiles) { obj.GetComponent<SpriteRenderer>().color = pathColour; } 
 
         startTile.GetComponent<SpriteRenderer>().color = startColour;
         endTile.GetComponent<SpriteRenderer>().color = endColour;

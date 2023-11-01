@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     [SerializeField] private float enemyHealth;
     [SerializeField] private float enemySpeed;
 
-    private int reward;
-    private int damage;
-
     private GameObject targetTile;
+
+    //private int reward;
+    //private int damage;
 
     private void Awake()
     {
@@ -29,6 +28,7 @@ public class Enemy : MonoBehaviour
         targetTile = MapGenerator.startTile;
     }
 
+    // Subtract enemy health
     public void TakeDamage(float amount)
     {
         enemyHealth -= amount;
@@ -39,12 +39,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    // Destroy the enemy when it dies
     private void Die()
     {
         Enemies.enemies.Remove(gameObject);
         Destroy(transform.gameObject);
     }
 
+    // Enemy movement to targetTile (players base)
     private void MoveEnemy()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetTile.transform.position, enemySpeed * Time.deltaTime);
@@ -72,7 +75,6 @@ public class Enemy : MonoBehaviour
     {
         CheckPosition();
         MoveEnemy();
-
         TakeDamage(0);
     }
 }

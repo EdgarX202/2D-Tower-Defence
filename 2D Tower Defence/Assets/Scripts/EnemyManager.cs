@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyManager
 {
    [SerializeField] private float enemySpeed;
-    private int enemyDamage;
    [SerializeField] private int enemyHealth;
     private int enemyShield;
+    private int enemyDamage;
 
     // Properties
     public float EnemySpeed

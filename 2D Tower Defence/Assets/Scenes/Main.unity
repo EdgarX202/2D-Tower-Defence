@@ -156,8 +156,6 @@ MonoBehaviour:
   pathColour: {r: 0.5660378, g: 0.12495549, b: 0.12495549, a: 0.80784315}
   startColour: {r: 0.2179779, g: 0.5120864, b: 0.735849, a: 0.8392157}
   endColour: {r: 0.8584906, g: 0.17645328, b: 0.019437497, a: 0.92156863}
-  mapWidth: 17
-  mapHeight: 7
 --- !u!4 &16185471
 Transform:
   m_ObjectHideFlags: 0
@@ -9778,7 +9776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 58.3, y: -39.5}
+  m_AnchoredPosition: {x: 58.30005, y: -39.5}
   m_SizeDelta: {x: 321.5935, y: 60.1319}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &213691452
@@ -10378,8 +10376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopManager: {fileID: 1187295997}
-  basicTowerObj: {fileID: 8615295815187911311, guid: 9b02cdca60f893b419998dfb70615dcb, type: 3}
-  cam: {fileID: 1520423536}
   mask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -10387,6 +10383,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isBuilding: 0
+  towerOnSlot: 0
+  cam: {fileID: 1520423536}
+  basicTowerObj: {fileID: 8615295815187911311, guid: 9b02cdca60f893b419998dfb70615dcb, type: 3}
 --- !u!1 &502992493
 GameObject:
   m_ObjectHideFlags: 0
@@ -11656,7 +11655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currencyManager: {fileID: 1305823069}
   basicTowerPrefab: {fileID: 8615295815187911311, guid: 9b02cdca60f893b419998dfb70615dcb, type: 3}
-  basicTowerCost: 500
+  basicTowerCost: 200
 --- !u!1 &1305823067
 GameObject:
   m_ObjectHideFlags: 0
@@ -12288,12 +12287,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicEnemy: {fileID: 3738530814605293723, guid: 1f40cacc3c244c1408a3670392f3d104, type: 3}
-  timeBetweenWaves: 5
+  timeBetweenWaves: 3
   timeBeforeRoundStart: 5
   time: 0
   isRoundGoing: 0
   isIntermission: 0
-  isStarOfRound: 0
+  isStartOfRound: 0
   round: 0
 --- !u!4 &1540008386
 Transform:
