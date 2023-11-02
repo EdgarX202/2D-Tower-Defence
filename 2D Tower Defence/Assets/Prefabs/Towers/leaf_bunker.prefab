@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  damage: 25
-  timeBetweenShots: 0.81
+  damage: 10
+  timeBetweenShots: 5
   currentTarget: {fileID: 0}
   pivot: {fileID: 3862248291595734359}
   barrel: {fileID: 5775035604399095436}
@@ -235,9 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2add82fdac18e43b8f7d681ca9f90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tower: {fileID: 1823715298786968807}
   pivot: {fileID: 3862248291595734359}
   barrel: {fileID: 5775035604399095436}
-  tower: {fileID: 1823715298786968807}
 --- !u!58 &7907807939159822081
 CircleCollider2D:
   m_ObjectHideFlags: 0

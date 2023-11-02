@@ -67,7 +67,7 @@ public class Tower : MonoBehaviour
             if(currentTarget != null)
             {
                 Shoot();
-                nextTimeToShoot += Time.time + timeBetweenShots;
+                nextTimeToShoot += Time.deltaTime + timeBetweenShots;
             }
         }
     }
