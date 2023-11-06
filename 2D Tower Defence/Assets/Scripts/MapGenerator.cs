@@ -11,8 +11,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Color startColour;
     [SerializeField] private Color endColour;
     // Map dimensions
-    private int mapWidth = 17;
-    private int mapHeight = 7;
+    private int mapWidth = 17; // 17
+    private int mapHeight = 7; // 7
     // Tile index
     private GameObject currentTile;
     private int currentTileIndex;
@@ -102,6 +102,10 @@ public class MapGenerator : MonoBehaviour
             for(int y = 0; y < mapHeight; y++) 
             {
                 GameObject newTile = Instantiate(mapTile);
+
+                // Actual tile scale
+                //newTile.transform.localScale = new Vector2(1.5f, 1.5f);
+
                 mapTiles.Add(newTile);
                 newTile.transform.position = new Vector2(x, y);
             }
