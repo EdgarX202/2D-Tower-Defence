@@ -13,6 +13,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private Point doorIn;
     private Point doorOut;
+    private Point mapSize;
 
     // Properties
     // So that no other script could change tile size
@@ -42,6 +43,8 @@ public class LevelManager : Singleton<LevelManager>
 
 
         string[] mapData = ReadLevelTxt();
+
+        mapSize = new Point(mapData[0].ToCharArray().Length, mapData.Length);
 
         // Calculate x and y map size
         int mapXSize = mapData[0].ToCharArray().Length;
@@ -96,5 +99,10 @@ public class LevelManager : Singleton<LevelManager>
 
         Instantiate(doorInPrefab, Tiles[doorIn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         Instantiate(doorOutPrefab, Tiles[doorOut].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+    }
+
+    public bool InsideBounds(Point position)
+    {
+        return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
     }
 }

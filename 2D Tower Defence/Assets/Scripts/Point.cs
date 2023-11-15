@@ -13,4 +13,13 @@ public struct Point
        this.X = x;
        this.Y = y;
    }
+
+    public static bool operator == (Point one, Point two)
+    {
+        return one.X == two.X && one.Y == two.Y;
+    }
+    public static bool operator !=(Point one, Point two)
+    {
+        return one.X != two.X || one.Y != two.Y;
+    }
 }

@@ -9,7 +9,9 @@ public class TileScript : MonoBehaviour
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; private set; }
     public bool Debugging { get; set; }
-    public SpriteRenderer SpriteRenderer { get; set; }
+    public bool Walkable { get; set; }
+
+    private SpriteRenderer spriteRenderer;
 
     private Color32 fullColour = new Color32(255, 118, 118, 255); // RED
     private Color32 emptyColour = new Color32(96, 255, 90, 255); // GREEN
@@ -26,7 +28,7 @@ public class TileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -38,6 +40,7 @@ public class TileScript : MonoBehaviour
     // Sets up the tile
     public void Setup(Point gridPos, Vector3 worldPos, Transform parent)
     {
+        Walkable = true;
         IsEmpty = true;
         this.GridPosition = gridPos;
         transform.position = worldPos;
@@ -91,11 +94,13 @@ public class TileScript : MonoBehaviour
         TileColour(Color.white);
         // Buy the towert
         GameManager.Instance.BuyTower();
+
+        Walkable = false;
     }
 
     private void TileColour(Color newColor)
     {
        // Set the colour of the tile
-       SpriteRenderer.color = newColor;
+       spriteRenderer.color = newColor;
     }
 }
