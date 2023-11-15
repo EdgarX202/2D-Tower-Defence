@@ -8,6 +8,7 @@ public class Node
     public Point GridPosition { get; private set; }
     public TileScript TileReference { get; private set; }
     public Node Parent { get; private set; }
+    public Vector2 WorldPos { get; set; }
     public int G { get; set; }
     public int H { get; set; }
     public int F { get; set; }
@@ -17,6 +18,7 @@ public class Node
     {
         this.TileReference = tileReference;
         this.GridPosition = tileReference.GridPosition;
+        this.WorldPos = tileReference.WorldPosition; 
     }
 
     // Calculate all node values

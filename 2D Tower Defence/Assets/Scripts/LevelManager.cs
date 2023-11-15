@@ -15,15 +15,39 @@ public class LevelManager : Singleton<LevelManager>
     private Point doorOut;
     private Point mapSize;
 
+    private Stack<Node> enemyPath;
+
     // Properties
-    // So that no other script could change tile size
+    public Stack<Node> EnemyPath
+    {
+        get
+        {
+            if (enemyPath == null)
+            {
+                GeneratePath();
+            }
+
+            // Return new stack to every enemy spawned
+            return new Stack<Node>(new Stack<Node>(enemyPath));
+        }
+    }
+
     public float TileSize
     {
         // Get the tile width and return as a float
         get { return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
 
+    public Point DoorOut
+    {
+        get
+        {
+            return doorOut;
+        }
+    }
+
     public Dictionary<Point, TileScript> Tiles { get; set; }
+    public EnemyEntrance Entrance { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -97,12 +121,20 @@ public class LevelManager : Singleton<LevelManager>
         // Spawn at the end of the round
         doorOut = new Point(17, 8);
 
-        Instantiate(doorInPrefab, Tiles[doorIn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        GameObject entrance = Instantiate(doorInPrefab, Tiles[doorIn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        Entrance = entrance.GetComponent<EnemyEntrance>();
+        Entrance.name = "door_in";
+
         Instantiate(doorOutPrefab, Tiles[doorOut].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
     public bool InsideBounds(Point position)
     {
         return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
+    }
+
+    public void GeneratePath()
+    {
+        enemyPath = AStar.GetPath(doorIn, doorOut);
     }
 }

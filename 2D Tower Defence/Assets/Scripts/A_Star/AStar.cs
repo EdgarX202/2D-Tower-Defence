@@ -19,7 +19,7 @@ public static class AStar
         }
     }
 
-    public static void GetPath(Point start, Point goal)
+    public static Stack<Node> GetPath(Point start, Point goal)
     {
         // If no nodes exist, create nodes
         if(nodes == null )
@@ -72,6 +72,11 @@ public static class AStar
                         }
                         else
                         {
+                            if(!ConnectedDiagonally(currentNode, nodes[neighbourPosition]))
+                            {
+                                continue;
+                            }
+
                             gCost = 14;
                         }
 
@@ -119,7 +124,30 @@ public static class AStar
             }
         }
 
-        // WILL BE DELETED LATER **************
-        GameObject.Find("AStarDebug").GetComponent<AStarDebug>().DebugPath(openList, closeList);
+        return finalPath;
+
+        //GameObject.Find("AStarDebug").GetComponent<AStarDebug>().DebugPath(openList, closeList, finalPath);
+    }
+
+    private static bool ConnectedDiagonally(Node currentNode, Node neighbour)
+    {
+        Point direction = neighbour.GridPosition - currentNode.GridPosition;
+
+        Point first = new Point(currentNode.GridPosition.X + direction.X, currentNode.GridPosition.Y);
+        Point second = new Point(currentNode.GridPosition.X, currentNode.GridPosition.Y + direction.Y);
+
+        // If the node is inside the grid and tile is not walkable
+        if(LevelManager.Instance.InsideBounds(first) && !LevelManager.Instance.Tiles[first].Walkable)
+        {
+            return false;
+        }
+        if (LevelManager.Instance.InsideBounds(second) && !LevelManager.Instance.Tiles[second].Walkable)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

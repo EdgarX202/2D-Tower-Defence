@@ -11,16 +11,16 @@ public class AStarDebug : MonoBehaviour
     private TileScript goal;
 
     // Update is called once per frame
-    void Update()
-    {
-        ClickTile();
+    //void Update()
+    //{
+    //    ClickTile();
 
-        // Generate path between 2 points
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            AStar.GetPath(start.GridPosition, goal.GridPosition);
-        }
-    }
+    //    // Generate path between 2 points
+    //    if(Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        AStar.GetPath(start.GridPosition, goal.GridPosition);
+    //    }
+    //}
 
     private void ClickTile()
     {
@@ -53,11 +53,11 @@ public class AStarDebug : MonoBehaviour
     /// Debug the path to see what is what
     /// </summary>
     /// <param name="openList"></param>
-    public void DebugPath(HashSet<Node> openList, HashSet<Node> closedList)
+    public void DebugPath(HashSet<Node> openList, HashSet<Node> closedList, Stack<Node> pathFinal)
     {
         foreach(Node node in openList)
         {
-            if (node.TileReference != start)
+            if (node.TileReference != start && node.TileReference != goal)
             {
                 CreateDebugTile(node.TileReference.WorldPosition, Color.cyan, node);
             }
@@ -67,9 +67,19 @@ public class AStarDebug : MonoBehaviour
 
         foreach (Node node in closedList)
         {
-            if (node.TileReference != start && node.TileReference != goal)
+            if (node.TileReference != start && node.TileReference != goal && !pathFinal.Contains(node))
             {
                 CreateDebugTile(node.TileReference.WorldPosition, Color.blue, node);
+            }
+
+            PointToParent(node, node.TileReference.WorldPosition);
+        }
+
+        foreach(Node node in pathFinal)
+        {
+            if (node.TileReference != start && node.TileReference != goal)
+            {
+                CreateDebugTile(node.TileReference.WorldPosition, Color.green, node);
             }
         }
     }
