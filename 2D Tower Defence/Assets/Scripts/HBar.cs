@@ -55,4 +55,10 @@ public class HBar : MonoBehaviour
 
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
+
+    public void ResetBar()
+    {
+        content.fillAmount = 1;
+        Value = MaxValue;
+    }
 }

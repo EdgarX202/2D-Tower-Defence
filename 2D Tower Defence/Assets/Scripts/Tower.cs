@@ -81,10 +81,19 @@ public class Tower : MonoBehaviour
                 canAttack = false;
             }
         }
+        else if(enemies.Count > 0)
+        {
+            target = enemies.Dequeue();
+        }
+        //if(target != null && target.IsAlive)
+        //{
+        //    target = null;
+        //}
     }
 
     private void Shoot()
     {
+        // Get the projectile from object pool
         Projectile projectile = GameManager.Instance.Pool.getObject(projectileType).GetComponent<Projectile>();
 
         // Spawn in the middle of the tower

@@ -31,6 +31,11 @@ public class Stats
         }
     }
 
+    public HBar Bar
+    {
+        get { return bar; }
+    }
+
     public void Initialize()
     {
         this.MaxVal = maxVal;

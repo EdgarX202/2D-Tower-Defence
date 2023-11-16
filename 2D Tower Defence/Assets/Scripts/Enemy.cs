@@ -9,14 +9,22 @@ public class Enemy : MonoBehaviour
 
     private Stack<Node> enemyPath;
     private Vector3 destination;
+    private SpriteRenderer spriteRenderer;
 
     // Properties
     public Point GridPosition { get; set; }
     public bool IsActive { get; set; }
+    public bool IsAlive
+    {
+        // Return true is health is more than 0, otherwise the enemy is dead
+        get { return health.CurrentVal > 0; }
+    }
 
     private void Awake()
     {
-        health.Initialize();   
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        health.Initialize();  
     }
     private void Start()
     {
@@ -31,7 +39,7 @@ public class Enemy : MonoBehaviour
     {
         // Setting spawn position to where the entrance is
         transform.position = LevelManager.Instance.Entrance.transform.position;
-
+        this.health.Bar.ResetBar();
         this.health.MaxVal = health;
         this.health.CurrentVal = this.health.MaxVal;
 
@@ -78,6 +86,11 @@ public class Enemy : MonoBehaviour
             ResetEnemy();
 
             GameManager.Instance.Lives--;
+        }
+
+        if(collision.tag == "Tile")
+        {
+            spriteRenderer.sortingOrder = collision.GetComponent<TileScript>().GridPosition.Y;
         }
     }
 
