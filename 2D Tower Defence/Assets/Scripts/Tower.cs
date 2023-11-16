@@ -14,6 +14,7 @@ public class Tower : MonoBehaviour
     private bool canAttack = true;
     private float attackTime;
 
+    [SerializeField] private int damage;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float cooldown;
     [SerializeField] private string projectileType;
@@ -23,10 +24,13 @@ public class Tower : MonoBehaviour
     {
         get { return projectileSpeed; }
     }
-
     public Enemy Target
     {
         get { return target; }
+    }
+    public int Damage
+    {
+        get { return damage; }
     }
 
     private void Start()

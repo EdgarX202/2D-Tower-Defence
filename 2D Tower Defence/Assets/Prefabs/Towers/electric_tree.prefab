@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb4921955035bb4799255b0a97390cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
   projectileSpeed: 3
   cooldown: 3
   projectileType: projectile

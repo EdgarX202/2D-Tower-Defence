@@ -43,7 +43,12 @@ public class Projectile : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            GameManager.Instance.Pool.ObjectReset(gameObject);
+            if(target.gameObject == collision.gameObject)
+            {
+                target.TakeDamage(parent.Damage);
+
+                GameManager.Instance.Pool.ObjectReset(gameObject);
+            }
         }
 
     }

@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     public ObjectPool Pool { get; set; }
 
     private int currency;
+    private int health = 15;
     private int wave = 0;
     private int lives;
     private bool gameOver = false;
@@ -176,7 +177,13 @@ public class GameManager : Singleton<GameManager>
 
             // Get the enemy from the object pool and spawn
             Enemy enemy = Pool.getObject(type).GetComponent<Enemy>();
-            enemy.Spawn();
+            enemy.Spawn(health);
+
+            // Increase health every 3 waves
+            if(wave % 3 == 0)
+            {
+                health += 5;
+            }
 
             // Add a spawned enemy to list to keep count for current wave
             activeEnemies.Add(enemy);

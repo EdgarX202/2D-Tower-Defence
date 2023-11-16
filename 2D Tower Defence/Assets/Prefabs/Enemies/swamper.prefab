@@ -173,6 +173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 1
+  health:
+    bar: {fileID: 8162627864320690033}
+    maxVal: 0
+    currentVal: 0
 --- !u!1001 &5509005063378045354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,3 +279,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1919841061360618648, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
   m_PrefabInstance: {fileID: 5509005063378045354}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8162627864320690033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4410308407633923803, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
+  m_PrefabInstance: {fileID: 5509005063378045354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7f6677a33519747916df16be32b09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

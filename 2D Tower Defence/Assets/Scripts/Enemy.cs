@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float enemySpeed;
+    [SerializeField] private Stats health;
 
     private Stack<Node> enemyPath;
     private Vector3 destination;
@@ -13,6 +14,10 @@ public class Enemy : MonoBehaviour
     public Point GridPosition { get; set; }
     public bool IsActive { get; set; }
 
+    private void Awake()
+    {
+        health.Initialize();   
+    }
     private void Start()
     {
         IsActive = true;
@@ -22,10 +27,13 @@ public class Enemy : MonoBehaviour
         EnemyMove();
     }
 
-    public void Spawn()
+    public void Spawn(int health)
     {
         // Setting spawn position to where the entrance is
         transform.position = LevelManager.Instance.Entrance.transform.position;
+
+        this.health.MaxVal = health;
+        this.health.CurrentVal = this.health.MaxVal;
 
         SetPath(LevelManager.Instance.EnemyPath);
     }
@@ -82,5 +90,24 @@ public class Enemy : MonoBehaviour
 
         // Enemy removes itself after exiting
         GameManager.Instance.EnemyRemove(this);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (IsActive)
+        {
+            health.CurrentVal -= damage;
+
+            if (health.CurrentVal <= 0 )
+            {
+                // Get some money for killing an enemy
+                GameManager.Instance.Currency += 2;
+
+                GameManager.Instance.Pool.ObjectReset(gameObject);
+                GameManager.Instance.EnemyRemove(this);
+
+     
+            }
+        }
     }
 }
