@@ -1,18 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stats : MonoBehaviour
+[Serializable]
+public class Stats
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private HBar bar;
+    [SerializeField] private float maxVal;
+    [SerializeField] private float currentVal;
+
+    // Properties
+    public float CurrentVal
     {
-        
+        get { return currentVal; }
+        set 
+        {
+            this.currentVal = Mathf.Clamp(value,0,MaxVal);
+            bar.Value = currentVal;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public float MaxVal
     {
-        
+        get { return maxVal; }
+        set
+        {
+            this.maxVal = value;
+            bar.MaxValue = maxVal;
+        }
+    }
+
+    public void Initialize()
+    {
+        this.MaxVal = maxVal;
+        this.CurrentVal = currentVal;
     }
 }
