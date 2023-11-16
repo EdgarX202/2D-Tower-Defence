@@ -68,6 +68,8 @@ public class Enemy : MonoBehaviour
         if( collision.tag == "Exit")
         {
             ResetEnemy();
+
+            GameManager.Instance.Lives--;
         }
     }
 

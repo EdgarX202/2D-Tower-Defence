@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,10 +13,17 @@ public class GameManager : Singleton<GameManager>
 
     private int currency;
     private int wave = 0;
+    private int lives;
+    private bool gameOver = false;
 
+    [SerializeField] private TextMeshProUGUI livesTxt;
     [SerializeField] private GameObject waveBtn;
     [SerializeField] private TextMeshProUGUI waveTxt;
     [SerializeField] private TextMeshProUGUI currencyTxt;
+    [SerializeField] private GameObject gameOverMenu;
+
+    // Currently selected tower
+    private Tower selectedTower;
 
     // To keep the count of active enemies
     private List<Enemy> activeEnemies = new List<Enemy>();
@@ -42,6 +50,26 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public int Lives
+    {
+        get
+        {
+            return lives;
+        }
+        set
+        {
+            this.lives = value;
+
+            if (lives <= 0)
+            {
+                this.lives = 0;
+                GameOver();
+            }
+
+            livesTxt.text = lives.ToString();
+        }
+    }
+
     private void Awake()
     {
        Pool = GetComponent<ObjectPool>();
@@ -49,6 +77,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         Currency = 500;   
+        Lives = 5;
     }
     private void Update()
     {
@@ -73,11 +102,34 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    // What happens when ESC is pressed
+    public void SelectTower(Tower tower)
+    {
+        if(selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+
+        selectedTower = tower;
+        selectedTower.Select();
+    }
+    public void DeselectTower()
+    {
+        if(selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+
+        selectedTower = null;
+    }
+
+    /// <summary>
+    /// Handle ESC press
+    /// </summary>
     private void HandleEscapeButton()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
+            // Deactivate hover instance
             Hover.Instance.Deactivate();
         }
     }
@@ -135,12 +187,36 @@ public class GameManager : Singleton<GameManager>
 
     public void EnemyRemove(Enemy enemy)
     {
+        // Remove enemies from active list
         activeEnemies.Remove(enemy);
 
-        // If wave is finished, enable wave button
-        if(!ActiveWave)
+        // If wave is finished and its not a game over, enable wave button
+        if(!ActiveWave && !gameOver)
         {
-            waveBtn.SetActive(true);
+            waveBtn.SetActive(true); // **** FIX THIS - BUTTON REAPPEARS AFTER FIRST ENEMY IS GONE *********
         }
+    }
+
+    // When lives are at 0, call game over
+    public void GameOver()
+    {
+        if(!gameOver)
+        {
+            gameOver = true;
+            gameOverMenu.SetActive(true);
+        }
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1;
+
+        // Reload the same level
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

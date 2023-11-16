@@ -13,6 +13,8 @@ public class TileScript : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private Tower myTower;
+
     private Color32 fullColour = new Color32(255, 118, 118, 255); // RED
     private Color32 emptyColour = new Color32(96, 255, 90, 255); // GREEN
 
@@ -70,6 +72,17 @@ public class TileScript : MonoBehaviour
                 PlaceTower();
             }
         }
+        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn == null && Input.GetMouseButton(0))
+        {
+            if(myTower != null)
+            {
+                GameManager.Instance.SelectTower(myTower);
+            }
+            else
+            {
+                GameManager.Instance.DeselectTower();
+            }
+        }
     }
 
     private void OnMouseExit()
@@ -82,12 +95,14 @@ public class TileScript : MonoBehaviour
 
     private void PlaceTower()
     {
-        // Placing a tower object
+        // Create a tower object
         GameObject tower = Instantiate(GameManager.Instance.ClickedBtn.TowerPrefab, transform.position, Quaternion.identity);
         // Increase sorting layer number for the tower above not to overlap current tower
         tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y;
-        // Make a tower a child of a tile clicked
+        // Set the tile as transform parent to the tower (the tower will become a child)
         tower.transform.SetParent(transform);
+
+        this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
 
         IsEmpty = false;
         // Set the colour back to white
