@@ -177,6 +177,7 @@ MonoBehaviour:
     bar: {fileID: 8162627864320690033}
     maxVal: 0
     currentVal: 0
+  elementType: 2
 --- !u!1001 &5509005063378045354
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -105,6 +105,7 @@ MonoBehaviour:
     bar: {fileID: 6048276971981653366}
     maxVal: 0
     currentVal: 0
+  elementType: 1
 --- !u!50 &338243041268192669
 Rigidbody2D:
   serializedVersion: 4

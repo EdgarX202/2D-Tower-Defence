@@ -6,10 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float enemySpeed;
     [SerializeField] private Stats health;
+    [SerializeField] private Element elementType;
 
     private Stack<Node> enemyPath;
     private Vector3 destination;
     private SpriteRenderer spriteRenderer;
+    private int invulnerability = 2;
 
     // Properties
     public Point GridPosition { get; set; }
@@ -105,10 +107,17 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.EnemyRemove(this);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Element damageSource)
     {
         if (IsActive)
         {
+            if(damageSource == elementType)
+            {
+                damage = damage / invulnerability;
+                invulnerability++;
+            }
+
+            // Reduce health
             health.CurrentVal -= damage;
 
             if (health.CurrentVal <= 0 )

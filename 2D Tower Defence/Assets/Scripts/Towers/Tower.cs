@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+
+// ENUM for tower effects
+public enum Element
+{
+    ELECTRIC, POISON, FLAME, NONE
+}
+
+public abstract class Tower : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
@@ -32,11 +39,12 @@ public class Tower : MonoBehaviour
     {
         get { return damage; }
     }
+    public int Price { get; set; }
+    public Element ElementType { get; protected set; }
 
     private void Start()
     {
-        // Reference to sprite renderer
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        SetRenderer();
     }
     private void Update()
     {
@@ -50,6 +58,12 @@ public class Tower : MonoBehaviour
     {
         // Enable-Disable spriteRenderer
         spriteRenderer.enabled = !spriteRenderer.enabled;
+    }
+
+    public void SetRenderer()
+    {
+        // Reference to sprite renderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Attack()

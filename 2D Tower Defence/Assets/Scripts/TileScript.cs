@@ -7,7 +7,7 @@ public class TileScript : MonoBehaviour
 {
     // Properties
     public Point GridPosition { get; private set; }
-    public bool IsEmpty { get; private set; }
+    public bool IsEmpty { get; set; }
     public bool Debugging { get; set; }
     public bool Walkable { get; set; }
 
@@ -107,6 +107,10 @@ public class TileScript : MonoBehaviour
         IsEmpty = false;
         // Set the colour back to white
         TileColour(Color.white);
+
+        // Get the price of the clicked tower
+        myTower.Price = GameManager.Instance.ClickedBtn.Price;
+
         // Buy the towert
         GameManager.Instance.BuyTower();
 

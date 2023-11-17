@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
 {
     private Enemy target;
     private Tower parent;
+    private Element elementType;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Projectile : MonoBehaviour
     {
         this.target = parent.Target;
         this.parent = parent;
+        this.elementType = parent.ElementType;
     }
 
     private void MoveToTarget()
@@ -45,7 +47,7 @@ public class Projectile : MonoBehaviour
         {
             if(target.gameObject == collision.gameObject)
             {
-                target.TakeDamage(parent.Damage);
+                target.TakeDamage(parent.Damage, elementType);
 
                 GameManager.Instance.Pool.ObjectReset(gameObject);
             }

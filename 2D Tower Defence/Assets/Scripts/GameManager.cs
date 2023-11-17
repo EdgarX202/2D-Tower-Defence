@@ -22,6 +22,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TextMeshProUGUI waveTxt;
     [SerializeField] private TextMeshProUGUI currencyTxt;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject upgradePanel;
+    [SerializeField] private TextMeshProUGUI sellTxt;
 
     // Currently selected tower
     private Tower selectedTower;
@@ -112,14 +114,23 @@ public class GameManager : Singleton<GameManager>
 
         selectedTower = tower;
         selectedTower.Select();
+
+        // Set the text for selling tower, half price -- change?
+        sellTxt.text = "+ " + (selectedTower.Price / 2).ToString();
+
+        upgradePanel.SetActive(true);
     }
     public void DeselectTower()
     {
+        // If the tower is selected
         if(selectedTower != null)
         {
             selectedTower.Select();
         }
 
+        upgradePanel.SetActive(false);
+
+        // Remove reference to the tower
         selectedTower = null;
     }
 
@@ -213,6 +224,25 @@ public class GameManager : Singleton<GameManager>
             gameOverMenu.SetActive(true);
         }
     }
+
+    public void TowerSell()
+    {
+        if (selectedTower != null)
+        {
+            // Sell the tower for half price
+            Currency += selectedTower.Price / 2;
+
+            // Tower becomes a child of a tile once it is placed 
+            selectedTower.GetComponentInParent<TileScript>().IsEmpty = true;
+
+            // Destroy the selected tower
+            Destroy(selectedTower.transform.parent.gameObject);
+
+            // Deselect so there was no null reference
+            DeselectTower();
+        }
+    }
+
 
     public void Restart()
     {
