@@ -50,6 +50,9 @@ public class Enemy : MonoBehaviour
 
     public void Spawn(int health)
     {
+        // Remove all exisitng debuffs
+        debuffs.Clear();
+
         // Setting spawn position to where the entrance is
         transform.position = LevelManager.Instance.Entrance.transform.position;
         this.health.Bar.ResetBar();
@@ -110,11 +113,16 @@ public class Enemy : MonoBehaviour
     // Reset enemy stats on exit and make it re-usable
     private void ResetEnemy()
     {
+        // Clear all debuffs
+        debuffs.Clear();
+
+        // Set enemy speed back to normal
+        enemySpeed = MaxSpeed;
+
         IsActive = true;
         GridPosition = LevelManager.Instance.DoorOut;
+        // Remove and reset the enemy from the game
         GameManager.Instance.Pool.ObjectReset(gameObject);
-
-        // Enemy removes itself after exiting
         GameManager.Instance.EnemyRemove(this);
     }
 

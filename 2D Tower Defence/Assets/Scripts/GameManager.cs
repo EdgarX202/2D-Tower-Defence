@@ -4,9 +4,16 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Xml.Serialization;
+
+// Delegate for the currency change event
+public delegate void ChangeOfCurrency();
 
 public class GameManager : Singleton<GameManager>
 {
+    // Event is triggered when the currency changes
+    public event ChangeOfCurrency ChangeC;
+
     // Properties
     public TowerButton ClickedBtn { get; set; }
     public ObjectPool Pool { get; set; }
@@ -50,6 +57,8 @@ public class GameManager : Singleton<GameManager>
         {
             this.currency = value;
             this.currencyTxt.text = value.ToString();
+
+            OnCurrencyChange();
         }
     }
 
@@ -102,6 +111,15 @@ public class GameManager : Singleton<GameManager>
         {
             Currency -= ClickedBtn.Price;
             Hover.Instance.Deactivate();
+        }
+    }
+
+    public void OnCurrencyChange()
+    {
+        if (ChangeC != null)
+        {
+            ChangeC();
+            Debug.Log("Currency changed");
         }
     }
 
@@ -242,7 +260,6 @@ public class GameManager : Singleton<GameManager>
             DeselectTower();
         }
     }
-
 
     public void Restart()
     {

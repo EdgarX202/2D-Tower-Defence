@@ -85,7 +85,7 @@ public abstract class Tower : MonoBehaviour
             }
         }
 
-        if (target == null && enemies.Count > 0)
+        if (target == null && enemies.Count > 0 && enemies.Peek().IsActive)
         {
             // Remove the enemy that left towers range from queue
             target = enemies.Dequeue();
@@ -100,14 +100,11 @@ public abstract class Tower : MonoBehaviour
                 canAttack = false;
             }
         }
-        else if(enemies.Count > 0)
+
+        if (target != null && target.IsAlive || target != null && target.IsActive)
         {
-            target = enemies.Dequeue();
+            target = null;
         }
-        //if(target != null && target.IsAlive)
-        //{
-        //    target = null;
-        //}
     }
 
     private void Shoot()
