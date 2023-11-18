@@ -7,7 +7,7 @@ using UnityEngine;
 // ENUM for tower effects
 public enum Element
 {
-    ELECTRIC, POISON, FLAME, NONE
+    ELECTRIC, POISON, FLAME, ICE, NONE
 }
 
 public abstract class Tower : MonoBehaviour

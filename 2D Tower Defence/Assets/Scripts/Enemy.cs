@@ -19,17 +19,23 @@ public class Enemy : MonoBehaviour
     // Properties
     public Point GridPosition { get; set; }
     public bool IsActive { get; set; }
+    public float MaxSpeed { get; set; }
     public bool IsAlive
     {
         // Return true is health is more than 0, otherwise the enemy is dead
         get { return health.CurrentVal > 0; }
     }
     public Element ElementType { get { return elementType; } }
+    public float EnemySpeed
+    {
+        get { return enemySpeed; }
+        set { this.enemySpeed = value; }
+    }
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        MaxSpeed = enemySpeed;
         health.Initialize();  
     }
     private void Start()
