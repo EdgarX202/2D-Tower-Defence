@@ -46,11 +46,13 @@ public class Projectile : MonoBehaviour
         // If projectile element type is different from target element type
         if(target.ElementType != elementType)
         {
+            // Roll a random number
             float roll = Random.Range(0, 100);
 
+            // If in range of the proc, apply debuff
             if(roll <= parent.Proc)
             {
-                // Add debuff to the target - parent is the tower that projectile comes from
+                // Apply debuff to the target - parent is the tower that projectile comes from
                 target.AddDebuff(parent.GetDebuff());
             }
         }
@@ -59,6 +61,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // If the enemy is hit
         if(collision.tag == "Enemy")
         {
             if(target.gameObject == collision.gameObject)

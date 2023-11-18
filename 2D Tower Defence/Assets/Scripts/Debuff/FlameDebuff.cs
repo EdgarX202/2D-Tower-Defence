@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class FlameDebuff : Debuff
 {
-    private float timeTick;
-    private float timeSinceLastTick;
-    private float damageTick;
+    // Private
+    private float _timeTick;
+    private float _timeSinceLastTick;
+    private float _damageTick;
 
     // Constructor
     public FlameDebuff(float damageTick, float timeTick, float duration, Enemy target) : base(target, duration)
     {
-        this.damageTick = damageTick;
-        this.timeTick = timeTick;
+        this._damageTick = damageTick;
+        this._timeTick = timeTick;
     }
 
     public override void Update()
@@ -20,13 +21,17 @@ public class FlameDebuff : Debuff
         // If debuff has a target
         if (target != null)
         {
-            timeSinceLastTick += Time.deltaTime;
+            // Increase timer since last tick
+            _timeSinceLastTick += Time.deltaTime;
 
-            if(timeSinceLastTick >= timeTick)
+            // If the time that has passed is larger than the time that should pass before taking damage again
+            if(_timeSinceLastTick >= _timeTick)
             {
-                timeSinceLastTick = 0;
+                // Reset the timer
+                _timeSinceLastTick = 0;
 
-                target.TakeDamage(damageTick, Element.FLAME);
+                // Deal damage
+                target.TakeDamage(_damageTick, Element.FLAME);
             }
         }
 

@@ -118,7 +118,8 @@ public class Enemy : MonoBehaviour
         {
             if(damageSource == elementType)
             {
-                damage = damage / invulnerability;
+                // To make sure not to deal too much damage
+                damage /= invulnerability;
                 invulnerability++;
             }
 
@@ -144,34 +145,42 @@ public class Enemy : MonoBehaviour
         // and check if x type is == debuff type
         if (!debuffs.Exists(x => x.GetType() == debuff.GetType()))
         {
-            // If its a new debuff, add
+            // If its a new debuff, add it to the list
             newDebuffs.Add(debuff);
         }
     }
 
     public void RemoveDebuff(Debuff debuff)
     {
+        // Add debuffs needed to be removed to the list
         debuffsToRemove.Add(debuff);
     }
 
+    // Add and remove debuffs accordingally, then update.
     public void HandleDebuff()
     {
+        // If there are new debuffs
         if(newDebuffs.Count > 0)
         {
+            // Add to debuffs list
             debuffs.AddRange(newDebuffs);
 
+            // Clear the list 
             newDebuffs.Clear();
         }
 
         foreach(Debuff debuff in debuffsToRemove)
         {
+            // Remove debuffs
             debuffs.Remove(debuff);
         }
 
+        // Clear the list
         debuffsToRemove.Clear();
 
         foreach (Debuff debuff in debuffs)
         {
+            // Update every debuff
             debuff.Update();
         }
     }

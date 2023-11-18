@@ -12,6 +12,7 @@ public enum Element
 
 public abstract class Tower : MonoBehaviour
 {
+    // Private
     private SpriteRenderer spriteRenderer;
 
     private Enemy target;
@@ -21,12 +22,13 @@ public abstract class Tower : MonoBehaviour
     private bool canAttack = true;
     private float attackTime;
 
+    // Serialized fields
+    [SerializeField] private string projectileType;
     [SerializeField] private int damage;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float cooldown;
-    [SerializeField] private string projectileType;
     [SerializeField] private float debuffDuration;
-    [SerializeField] private float proc;
+    [SerializeField] private float proc; // Programmed random occurance - random event triggered by specific action/condition
 
     // Properties
     public float ProjectileSpeed { get { return projectileSpeed; } }
@@ -127,6 +129,7 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
+    // Return debuff of a specific type
     public abstract Debuff GetDebuff();
 
     public void OnTriggerExit2D(Collider2D collision)

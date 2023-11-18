@@ -4,9 +4,17 @@ using UnityEngine;
 
 public abstract class Debuff
 {
+    /*
+     * A DEBUFF - is a negative status effect that temporarily alters characters/enemies attributes or abilities.
+     * E.g. poison could slow the enemy down and deal some damage while the effect is on.
+     */
+
+    // Protected
     protected Enemy target;
     protected float duration;
-    private float elapsed;
+
+    // Private
+    private float _elapsed;
 
     // Constructor
     public Debuff(Enemy target, float duration)
@@ -17,9 +25,10 @@ public abstract class Debuff
 
     public virtual void Update()
     {
-        elapsed += Time.deltaTime;
+        _elapsed += Time.deltaTime;
 
-        if(elapsed >= duration)
+        // Remove debuffs
+        if(_elapsed >= duration)
         {
             Remove();
         }
