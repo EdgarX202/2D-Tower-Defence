@@ -9,4 +9,8 @@ public class PoisonTower : Tower
         base.SetRenderer();
         ElementType = Element.POISON;
     }
+    public override Debuff GetDebuff()
+    {
+        return new PoisonDebuff(Target);
+    }
 }

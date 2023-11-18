@@ -41,6 +41,22 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void ApplyDebuff()
+    {
+        // If projectile element type is different from target element type
+        if(target.ElementType != elementType)
+        {
+            float roll = Random.Range(0, 100);
+
+            if(roll <= parent.Proc)
+            {
+                // Add debuff to the target - parent is the tower that projectile comes from
+                target.AddDebuff(parent.GetDebuff());
+            }
+        }
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
@@ -50,6 +66,8 @@ public class Projectile : MonoBehaviour
                 target.TakeDamage(parent.Damage, elementType);
 
                 GameManager.Instance.Pool.ObjectReset(gameObject);
+
+                ApplyDebuff();
             }
         }
 

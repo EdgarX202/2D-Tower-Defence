@@ -137,6 +137,8 @@ MonoBehaviour:
   projectileSpeed: 3
   cooldown: 3
   projectileType: projectile
+  debuffDuration: 5
+  proc: 100
 --- !u!1 &6559320275097386540
 GameObject:
   m_ObjectHideFlags: 0

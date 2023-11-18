@@ -2,17 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Debuff : MonoBehaviour
+public abstract class Debuff
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Enemy target;
+    protected float duration;
+    private float elapsed;
+
+    // Constructor
+    public Debuff(Enemy target, float duration)
     {
-        
+        this.target = target;
+        this.duration = duration;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        
+        elapsed += Time.deltaTime;
+
+        if(elapsed >= duration)
+        {
+            Remove();
+        }
+    }
+
+    public virtual void Remove()
+    {
+        if (target != null)
+        {
+            target.RemoveDebuff(this);
+        }
     }
 }

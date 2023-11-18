@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
     private Vector3 destination;
     private SpriteRenderer spriteRenderer;
     private int invulnerability = 2;
+    private List<Debuff> debuffs = new List<Debuff>();
+    private List<Debuff> debuffsToRemove = new List<Debuff>();
+    private List<Debuff> newDebuffs = new List<Debuff>();
 
     // Properties
     public Point GridPosition { get; set; }
@@ -21,6 +24,7 @@ public class Enemy : MonoBehaviour
         // Return true is health is more than 0, otherwise the enemy is dead
         get { return health.CurrentVal > 0; }
     }
+    public Element ElementType { get { return elementType; } }
 
     private void Awake()
     {
@@ -34,6 +38,7 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
+        HandleDebuff();
         EnemyMove();
     }
 
@@ -107,7 +112,7 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.EnemyRemove(this);
     }
 
-    public void TakeDamage(int damage, Element damageSource)
+    public void TakeDamage(float damage, Element damageSource)
     {
         if (IsActive)
         {
@@ -130,6 +135,44 @@ public class Enemy : MonoBehaviour
 
      
             }
+        }
+    }
+
+    public void AddDebuff(Debuff debuff)
+    {
+        // Check the list of debuffs and everytime we find an element, call x
+        // and check if x type is == debuff type
+        if (!debuffs.Exists(x => x.GetType() == debuff.GetType()))
+        {
+            // If its a new debuff, add
+            newDebuffs.Add(debuff);
+        }
+    }
+
+    public void RemoveDebuff(Debuff debuff)
+    {
+        debuffsToRemove.Add(debuff);
+    }
+
+    public void HandleDebuff()
+    {
+        if(newDebuffs.Count > 0)
+        {
+            debuffs.AddRange(newDebuffs);
+
+            newDebuffs.Clear();
+        }
+
+        foreach(Debuff debuff in debuffsToRemove)
+        {
+            debuffs.Remove(debuff);
+        }
+
+        debuffsToRemove.Clear();
+
+        foreach (Debuff debuff in debuffs)
+        {
+            debuff.Update();
         }
     }
 }

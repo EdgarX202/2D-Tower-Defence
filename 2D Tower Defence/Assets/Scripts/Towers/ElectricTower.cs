@@ -9,4 +9,8 @@ public class ElectricTower : Tower
         base.SetRenderer();
         ElementType = Element.ELECTRIC;
     }
+    public override Debuff GetDebuff()
+    {
+        return new ElectricDebuff(Target);
+    }
 }

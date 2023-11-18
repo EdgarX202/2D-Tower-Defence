@@ -25,22 +25,25 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float cooldown;
     [SerializeField] private string projectileType;
+    [SerializeField] private float debuffDuration;
+    [SerializeField] private float proc;
 
     // Properties
-    public float ProjectileSpeed
-    {
-        get { return projectileSpeed; }
-    }
-    public Enemy Target
-    {
-        get { return target; }
-    }
-    public int Damage
-    {
-        get { return damage; }
-    }
+    public float ProjectileSpeed { get { return projectileSpeed; } }
+    public Enemy Target { get { return target; } }
+    public int Damage { get { return damage; } }
     public int Price { get; set; }
     public Element ElementType { get; protected set; }
+    public float Proc 
+    { 
+        get { return proc; } 
+        set { this.proc = value; }
+    }
+    public float DebuffDuration
+    {
+        get { return debuffDuration; }
+        set { this.debuffDuration = value; }
+    }
 
     private void Start()
     {
@@ -123,6 +126,8 @@ public abstract class Tower : MonoBehaviour
             enemies.Enqueue(collision.GetComponent<Enemy>());
         }
     }
+
+    public abstract Debuff GetDebuff();
 
     public void OnTriggerExit2D(Collider2D collision)
     {
