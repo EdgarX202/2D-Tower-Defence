@@ -133,12 +133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d87cb1a0b796a4598f44caf346ebf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
-  projectileSpeed: 3
-  cooldown: 3
   projectileType: projectile
+  damage: 10
+  projectileSpeed: 3
+  cooldown: 5
   debuffDuration: 5
   proc: 100
+  _timeTick: 5
+  splashPrefab: {fileID: 5708878106781342705, guid: 1104893b028590e4c96284c71530eee5, type: 3}
+  _splashDamage: 5
 --- !u!1 &6559320275097386540
 GameObject:
   m_ObjectHideFlags: 0
