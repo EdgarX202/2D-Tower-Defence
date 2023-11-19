@@ -31,6 +31,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject upgradePanel;
     [SerializeField] private TextMeshProUGUI sellTxt;
+    [SerializeField] private GameObject statsPanel;
 
     // Currently selected tower
     private Tower selectedTower;
@@ -272,5 +273,10 @@ public class GameManager : Singleton<GameManager>
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void ShowTooltip()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
     }
 }
