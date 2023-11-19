@@ -6,6 +6,8 @@ public class IceTower : Tower
 {
     [SerializeField] private float _slowingFactor;
 
+    public float SlowingFactor { get { return _slowingFactor; } }
+
     private void Start()
     {
         ElementType = Element.ICE;
@@ -13,6 +15,6 @@ public class IceTower : Tower
 
     public override Debuff GetDebuff()
     {
-        return new IceDebuff(_slowingFactor, Target, DebuffDuration);
+        return new IceDebuff(SlowingFactor, Target, DebuffDuration);
     }
 }

@@ -24,14 +24,18 @@ public class GameManager : Singleton<GameManager>
     private int lives;
     private bool gameOver = false;
 
+    // Serialized fields
+    [Header("Text Fields")]
     [SerializeField] private TextMeshProUGUI livesTxt;
-    [SerializeField] private GameObject waveBtn;
     [SerializeField] private TextMeshProUGUI waveTxt;
     [SerializeField] private TextMeshProUGUI currencyTxt;
+    [SerializeField] private TextMeshProUGUI sellTxt;
+    [SerializeField] private TextMeshProUGUI statsTxt;
+    [Header("GameObject Fields")]
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject upgradePanel;
-    [SerializeField] private TextMeshProUGUI sellTxt;
     [SerializeField] private GameObject statsPanel;
+    [SerializeField] private GameObject waveBtn;
 
     // Currently selected tower
     private Tower selectedTower;
@@ -278,5 +282,10 @@ public class GameManager : Singleton<GameManager>
     public void ShowTooltip()
     {
         statsPanel.SetActive(!statsPanel.activeSelf);
+    }
+
+    public void SetTooltipTxt(string text)
+    {
+        statsTxt.text = text;
     }
 }
