@@ -133,12 +133,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6464e78b3517164daeaf66ce23b2b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileType: projectile
   damage: 5
   projectileSpeed: 3
   cooldown: 3
-  projectileType: projectile
   debuffDuration: 100
-  proc: 2
+  proc: 10
 --- !u!1 &5390224659991181151
 GameObject:
   m_ObjectHideFlags: 0

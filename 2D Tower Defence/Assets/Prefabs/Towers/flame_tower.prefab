@@ -138,7 +138,7 @@ MonoBehaviour:
   projectileSpeed: 3
   cooldown: 3
   debuffDuration: 10
-  proc: 100
+  proc: 10
   timeTick: 1
   damageTick: 5
 --- !u!1 &8488805708357751490

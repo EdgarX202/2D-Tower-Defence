@@ -142,6 +142,8 @@ public class Enemy : MonoBehaviour
 
             if (health.CurrentVal <= 0 )
             {
+                SoundManager.Instance.PlaysEffects("damage");
+
                 // Get some money for killing an enemy
                 GameManager.Instance.Currency += 2;
 

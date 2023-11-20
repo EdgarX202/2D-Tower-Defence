@@ -138,7 +138,7 @@ MonoBehaviour:
   projectileSpeed: 3
   cooldown: 5
   debuffDuration: 5
-  proc: 100
+  proc: 10
   _timeTick: 5
   splashPrefab: {fileID: 5708878106781342705, guid: 1104893b028590e4c96284c71530eee5, type: 3}
   _splashDamage: 5

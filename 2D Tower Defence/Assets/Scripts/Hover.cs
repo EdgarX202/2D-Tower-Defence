@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Hover : Singleton<Hover>
 {
     private SpriteRenderer spriteRenderer;
     private SpriteRenderer rangeSpriteRen;
+
+    public bool isVisible { get; private set; }
 
     private void Start()
     {
@@ -45,6 +48,7 @@ public class Hover : Singleton<Hover>
         // Enable sprite renderer
         spriteRenderer.enabled = true;
         rangeSpriteRen.enabled = true;
+        isVisible = true;
     }
 
     /// <summary>
@@ -57,5 +61,6 @@ public class Hover : Singleton<Hover>
         rangeSpriteRen.enabled = false;
         // Unclick the button
         GameManager.Instance.ClickedBtn = null;
+        isVisible=false;
     }
 }
