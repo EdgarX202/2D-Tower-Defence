@@ -95,6 +95,15 @@ public class TileScript : MonoBehaviour
 
     private void PlaceTower()
     {
+        Walkable = false;
+
+        if(AStar.GetPath(LevelManager.Instance.DoorIn, LevelManager.Instance.DoorOut) == null)
+        {
+            // There is no path
+            Walkable = true;
+            return;
+        }
+
         // Create a tower object
         GameObject tower = Instantiate(GameManager.Instance.ClickedBtn.TowerPrefab, transform.position, Quaternion.identity);
         // Increase sorting layer number for the tower above not to overlap current tower

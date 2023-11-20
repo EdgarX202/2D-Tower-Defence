@@ -46,6 +46,14 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public Point DoorIn
+    {
+        get
+        {
+            return doorIn;
+        }
+    }
+
     public Dictionary<Point, TileScript> Tiles { get; set; }
     public EnemyEntrance Entrance { get; set; }
 

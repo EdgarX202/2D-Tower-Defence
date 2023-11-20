@@ -119,12 +119,11 @@ public static class AStar
                     finalPath.Push(currentNode);
                     currentNode = currentNode.Parent;
                 }
-           
-                break;
+
+                return finalPath;
             }
         }
-
-        return finalPath;
+        return null;
 
         //GameObject.Find("AStarDebug").GetComponent<AStarDebug>().DebugPath(openList, closeList, finalPath);
     }
