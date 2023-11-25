@@ -154,8 +154,8 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnDoors()
     {
         // Random Y position for entrance/exit
-        int doorInRand = random.Next(0, 10);
-        int doorOutRand = random.Next(0, 10);
+        int doorInRand = random.Next(0, 8);
+        int doorOutRand = random.Next(0, 8);
 
         // Spawn at the start of the road
         _doorIn = new Point(0,doorInRand);
