@@ -8,11 +8,12 @@ public class IceDebuff : Debuff
     private bool _applied;
 
     // Constructor
-public IceDebuff(float slowingFactor, Enemy target, float duration) : base(target, duration)
+    public IceDebuff(float slowingFactor, Enemy target, float duration) : base(target, duration)
     {
         this._slowingFactor = slowingFactor;
     }
 
+    // Enable debuff effect - slow down the enemy
     public override void Update()
     {
         if(target != null)

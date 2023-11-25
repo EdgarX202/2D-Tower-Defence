@@ -6,6 +6,6 @@ public class ElectricDebuff : Debuff
 {
     public ElectricDebuff(Enemy target) : base(target,1)
     {
-
+        // Not yet implemented
     }
 }

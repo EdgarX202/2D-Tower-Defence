@@ -1,12 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public static class AStar
 {
+    // Dictionary
     private static Dictionary<Point, Node> nodes; 
 
+    // Creating nodes and adding to dictionary
     private static void CreateNodes()
     {
         nodes = new Dictionary<Point, Node>();
@@ -19,6 +20,7 @@ public static class AStar
         }
     }
 
+    // Getting the final path
     public static Stack<Node> GetPath(Point start, Point goal)
     {
         // If no nodes exist, create nodes
@@ -41,6 +43,7 @@ public static class AStar
         // Add the start node to open list
         openList.Add(currentNode);
 
+        // Calculating g,h,f and neighbours
         while(openList.Count > 0)
         {
             // Get the neighbours around the current node
@@ -85,7 +88,7 @@ public static class AStar
 
                         if (openList.Contains(neighbour))
                         {
-                            // Finding better G score
+                            // Finding a better G score
                             if (currentNode.G + gCost < neighbour.G)
                             {
                                 neighbour.CalculateValues(currentNode, gCost, nodes[goal]);
@@ -110,7 +113,7 @@ public static class AStar
                 currentNode = openList.OrderBy(n => n.F).First();
             }
 
-            // Search finished (goal found), exit loop
+            // Search finished (goal found), return path
             if(currentNode == nodes[goal])
             {
                 while(currentNode.GridPosition != start)
@@ -119,15 +122,16 @@ public static class AStar
                     finalPath.Push(currentNode);
                     currentNode = currentNode.Parent;
                 }
-
                 return finalPath;
             }
         }
+
         return null;
 
         //GameObject.Find("AStarDebug").GetComponent<AStarDebug>().DebugPath(openList, closeList, finalPath);
     }
 
+    // Finding diagonal paths
     private static bool ConnectedDiagonally(Node currentNode, Node neighbour)
     {
         Point direction = neighbour.GridPosition - currentNode.GridPosition;

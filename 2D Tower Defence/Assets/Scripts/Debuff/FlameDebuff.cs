@@ -16,6 +16,7 @@ public class FlameDebuff : Debuff
         this._timeTick = timeTick;
     }
 
+    // Enable debuff damage - deal extensive damage
     public override void Update()
     {
         // If debuff has a target
@@ -34,7 +35,6 @@ public class FlameDebuff : Debuff
                 target.TakeDamage(_damageTick, Element.FLAME);
             }
         }
-
         base.Update();
     }
 }

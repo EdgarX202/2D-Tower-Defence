@@ -33,12 +33,6 @@ public class TileScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // Sets up the tile
     public void Setup(Point gridPos, Vector3 worldPos, Transform parent)
     {
@@ -120,7 +114,7 @@ public class TileScript : MonoBehaviour
         // Get the price of the clicked tower
         myTower.Price = GameManager.Instance.ClickedBtn.Price;
 
-        // Buy the towert
+        // Buy the tower
         GameManager.Instance.BuyTower();
 
         Walkable = false;

@@ -4,60 +4,67 @@ using UnityEngine;
 
 public class AStarDebug : MonoBehaviour
 {
+    // Serialized fields
+    [Header("Debugging Prefabs")]
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private GameObject debugTilePrefab;
 
-    private TileScript start;
-    private TileScript goal;
+    // Private
+    private TileScript _start;
+    private TileScript _goal;
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    ClickTile();
 
-    //    // Generate path between 2 points
-    //    if(Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        AStar.GetPath(start.GridPosition, goal.GridPosition);
-    //    }
-    //}
+    // Debug Update()
+    /*
+    void Update()
+    {
+        //ClickTile();
 
+        // Generate path between 2 points
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AStar.GetPath(_start.GridPosition, _goal.GridPosition);
+        }
+    }
+    */
+
+    // Selecting start and exit by using mouse click
     private void ClickTile()
     {
         if(Input.GetMouseButtonDown(1))
         {
+            // Using raycast to get mouse click position
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
+            // Create debug tiles for start and exit
             if(hit.collider != null )
             {
                 TileScript tmp = hit.collider.GetComponent<TileScript>();
 
                 if(tmp != null )
                 {
-                    if(start == null)
+                    if(_start == null)
                     {
-                        start = tmp;
-                        CreateDebugTile(start.WorldPosition, new Color32(255, 135, 0, 255));
+                        _start = tmp;
+                        CreateDebugTile(_start.WorldPosition, new Color32(255, 135, 0, 255));
                     }
-                    else if(goal == null)
+                    else if(_goal == null)
                     {
-                        goal = tmp;
-                        CreateDebugTile(goal.WorldPosition, new Color32(255, 0, 0, 255));
+                        _goal = tmp;
+                        CreateDebugTile(_goal.WorldPosition, new Color32(255, 0, 0, 255));
                     }
                 }
             }
         }
     }
 
-    /// <summary>
-    /// Debug the path to see what is what
-    /// </summary>
-    /// <param name="openList"></param>
+    // Create open, close, final paths with neighbouring tiles pointing towards parent
     public void DebugPath(HashSet<Node> openList, HashSet<Node> closedList, Stack<Node> pathFinal)
     {
-        foreach(Node node in openList)
+        // Open list tiles
+        foreach (Node node in openList)
         {
-            if (node.TileReference != start && node.TileReference != goal)
+            if (node.TileReference != _start && node.TileReference != _goal)
             {
                 CreateDebugTile(node.TileReference.WorldPosition, Color.cyan, node);
             }
@@ -65,9 +72,10 @@ public class AStarDebug : MonoBehaviour
             PointToParent(node, node.TileReference.WorldPosition);
         }
 
+        // Closed list tiles
         foreach (Node node in closedList)
         {
-            if (node.TileReference != start && node.TileReference != goal && !pathFinal.Contains(node))
+            if (node.TileReference != _start && node.TileReference != _goal && !pathFinal.Contains(node))
             {
                 CreateDebugTile(node.TileReference.WorldPosition, Color.blue, node);
             }
@@ -75,26 +83,23 @@ public class AStarDebug : MonoBehaviour
             PointToParent(node, node.TileReference.WorldPosition);
         }
 
-        foreach(Node node in pathFinal)
+        // Final path tiles
+        foreach (Node node in pathFinal)
         {
-            if (node.TileReference != start && node.TileReference != goal)
+            if (node.TileReference != _start && node.TileReference != _goal)
             {
                 CreateDebugTile(node.TileReference.WorldPosition, Color.green, node);
             }
         }
     }
 
-    /// <summary>
-    /// Pointing neighbouring tiles to parent
-    /// </summary>
-    /// <param name="node"></param>
-    /// <param name="pos"></param>
+    // Point neighbouring tiles to parent
     private void PointToParent(Node node, Vector2 pos)
     {
         if(node.Parent != null)
         {
+            // Instantiate an arrow prefab and set its sorting layer
             GameObject arrow = (GameObject)Instantiate(arrowPrefab, pos, Quaternion.identity);
-
             arrow.GetComponent<SpriteRenderer>().sortingOrder = 3;
 
             // Point to the right
@@ -140,12 +145,15 @@ public class AStarDebug : MonoBehaviour
         }
     }
 
+    // Create debug tile prefab showing G,H,F numbers
     private void CreateDebugTile(Vector3 worldPos, Color32 color, Node node = null)
     {
+        // Instantiate debug tile prefab
         GameObject debugTile = Instantiate(debugTilePrefab, worldPos, Quaternion.identity);
 
         if(node != null)
         {
+            // Create text with correct G,H,F numbers
             DebugTile tmp = debugTile.GetComponent<DebugTile>();
             tmp.G.text += node.G;
             tmp.H.text += node.H;

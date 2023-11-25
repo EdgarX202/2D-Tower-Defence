@@ -21,7 +21,7 @@ public class Node
         this.WorldPos = tileReference.WorldPosition; 
     }
 
-    // Calculate all node values
+    // Calculating node values
     public void CalculateValues(Node parent, int gCost, Node goal)
     {
         this.Parent = parent;

@@ -23,6 +23,7 @@ public abstract class Debuff
         this.duration = duration;
     }
 
+    // Update _elapased and remove debuffs
     public virtual void Update()
     {
         _elapsed += Time.deltaTime;
@@ -34,6 +35,7 @@ public abstract class Debuff
         }
     }
 
+    // Remove debuffs
     public virtual void Remove()
     {
         if (target != null)
