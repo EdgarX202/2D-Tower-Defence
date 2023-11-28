@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d87cb1a0b796a4598f44caf346ebf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: projectile
+  projectileType: PoisonBall
   damage: 10
   projectileSpeed: 3
   cooldown: 3

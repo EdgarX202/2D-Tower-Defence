@@ -208,7 +208,7 @@ public class GameManager : Singleton<GameManager>
             switch (enemyIndex)
             {
                 case 0:
-                    type = "forest_soul";
+                    type = "SnowPulse";
                     break;
                 case 1:
                     type = "fog_carrier";

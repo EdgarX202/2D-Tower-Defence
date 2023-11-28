@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f1f141205070b4c977f14e5194cfa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: projectile
+  projectileType: FlameBall
   damage: 5
   projectileSpeed: 3
   cooldown: 3
