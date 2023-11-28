@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 4458089375724545539, guid: afdb86af13315274db66297ad8f6ec1c, type: 3}
   sprite: {fileID: 21300000, guid: d4a625a0d7bc339468b044c897699ecd, type: 3}
-  price: 100
+  price: 8
   priceTxt: {fileID: 1142942613}
 --- !u!114 &41900523
 MonoBehaviour:
@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 8799171156574845798, guid: 3030b156d8e78b5409486152f6ae642e, type: 3}
   sprite: {fileID: 21300000, guid: 84bb2a5ed993af442b356b04f22e47e1, type: 3}
-  price: 70
+  price: 10
   priceTxt: {fileID: 622123518}
 --- !u!114 &500317282
 MonoBehaviour:
@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 4325020724668721732, guid: 811deab4a1ffced43a13f3640b2a3bd6, type: 3}
   sprite: {fileID: 21300000, guid: 12b1e7694146eed4da252e308121be2e, type: 3}
-  price: 55
+  price: 12
   priceTxt: {fileID: 1410441538}
 --- !u!114 &565193424
 MonoBehaviour:
@@ -2655,7 +2655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 5587555217073251196, guid: a9b588fdde02bbe47802131e89d7469f, type: 3}
   sprite: {fileID: 21300000, guid: b600076117d1522468d9051d559dc965, type: 3}
-  price: 50
+  price: 15
   priceTxt: {fileID: 980622159}
 --- !u!114 &618402095
 MonoBehaviour:
@@ -4827,13 +4827,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPoolPrefabs:
   - {fileID: 4485096901156096002, guid: 8dcf923563a56de4ba7b1470bcf56c13, type: 3}
-  - {fileID: 4782766757551081095, guid: dad033312539ab845a7e021577112e81, type: 3}
-  - {fileID: 2160392105903380590, guid: d9aef1adefcf6854aa98c2c57516f056, type: 3}
   - {fileID: 2378136768364778287, guid: caa4467276377934fbd6035da93b568f, type: 3}
   - {fileID: 4627083791981500400, guid: 0c11d6df9e273974589ecf81e58aaced, type: 3}
   - {fileID: 5859131557428110877, guid: b146cfdfd7da2854eb862300be7688ae, type: 3}
   - {fileID: 8471905106744041133, guid: 34ecad3f38002fe49b86ce12d925b045, type: 3}
   - {fileID: 6269211441746102616, guid: b6aec262835f3454494bfc79b0ee79af, type: 3}
+  - {fileID: 8153966756102544160, guid: 658ea981f6abca241b3eb0d180fff7c7, type: 3}
+  - {fileID: 3049694059438286997, guid: 815e2f484935383419fdf92c1bd7c3b8, type: 3}
+  - {fileID: 3375575146854653935, guid: 1ab8dd4a7c9ee2b43afc13c3e0221309, type: 3}
 --- !u!1 &1140289536
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,8 +6184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilePrefabs:
   - {fileID: 2182834624464679028, guid: a8877276abd6c0a4382b7a490d3c2413, type: 3}
-  - {fileID: 4097611488027885433, guid: 75009625ec3281444a754c7324e419a6, type: 3}
-  - {fileID: 4828305221008233847, guid: 07f76f178bb367e4ba3846cd0d8353d0, type: 3}
   - {fileID: 5287282598058385768, guid: 4deacc20481a9674e8fc2246946dc95b, type: 3}
   - {fileID: 7957568804078644825, guid: 3543f054222dcff43a00d7906aeab8fa, type: 3}
   - {fileID: 1272499597723861281, guid: 68d96f3251ff1724993a05a97f4dafba, type: 3}
@@ -7373,7 +7372,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Normal
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
@@ -7406,7 +7405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 4386714801594713932, guid: d7ba6ae88991e75489ad15fcebc72e9c, type: 3}
   sprite: {fileID: 21300000, guid: b64cbdb19bfa5ac4a834d939366e82b2, type: 3}
-  price: 55
+  price: 10
   priceTxt: {fileID: 1312027146}
 --- !u!114 &1597273744
 MonoBehaviour:

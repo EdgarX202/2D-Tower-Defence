@@ -134,12 +134,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: IceBall
-  damage: 5
+  damage: 15
   projectileSpeed: 3
-  cooldown: 3
-  debuffDuration: 5
-  proc: 10
-  _slowingFactor: 50
+  cooldown: 1
+  debuffDuration: 10
+  proc: 50
+  _slowingFactor: 20
 --- !u!1 &4325020724668721732
 GameObject:
   m_ObjectHideFlags: 0

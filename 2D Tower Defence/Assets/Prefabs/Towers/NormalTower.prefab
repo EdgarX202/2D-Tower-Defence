@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 1650486968312943035}
   - component: {fileID: 5886646679596871167}
   - component: {fileID: 8394539996140849947}
+  - component: {fileID: 5179027352513947918}
   m_Layer: 2
   m_Name: Range
   m_TagString: Untagged
@@ -205,3 +206,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &5179027352513947918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013095726166866733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27990f21295910b4db623ec977964290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileType: Snowball
+  damage: 10
+  projectileSpeed: 3
+  cooldown: 1
+  debuffDuration: 0
+  proc: 0

@@ -19,8 +19,10 @@ public class ElectricTower : Tower
 
         Upgrades = new TowerUpgrade[]
         {
-            new TowerUpgrade(15,22,10,10,1,5),
-            new TowerUpgrade(20,25,15,15,2,10)
+            // Lvl 2 Upgrade
+            new TowerUpgrade(5,6,1,0,1,10),
+            // Lvl 3 Upgrade
+            new TowerUpgrade(10,10,1,0,1,5)
          };
 
     }
@@ -35,10 +37,10 @@ public class ElectricTower : Tower
         if (NextUpgrade != null)
         {
             // Return new upgrade stats
-            return string.Format("<color=#FFE666>{0}</color>{1} \nElectric damage: {2} <color=#00ff00ff>+{3}</color> \nElectric charge chance: {4} <color=#00ff00ff>+{5}</color>", "<size=20><b>Electric</b></size> ", base.GetStats(), DamageTick, NextUpgrade.SpecialDamage, Proc, NextUpgrade.Proc);
+            return string.Format("<color=#FFE666>{0}</color>{1} \nElectric charge chance: {2}%", "<size=20><b>Electric</b></size> ", base.GetStats(), Proc);
         }
 
         // Return the current upgrade
-        return string.Format("<color=#FFE666>{0}</color>{1} \nDamage: {2}", "<size=20><b>Electric</b></size> ", base.GetStats(), DamageTick);
+        return string.Format("<color=#FFE666>{0}</color>{1} \nElectric charge chance: {2}%", "<size=20><b>Electric</b></size> ", base.GetStats(), Proc);
     }
 }

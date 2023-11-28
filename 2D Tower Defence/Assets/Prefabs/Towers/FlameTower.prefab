@@ -134,11 +134,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: FlameBall
-  damage: 5
+  damage: 18
   projectileSpeed: 3
-  cooldown: 3
-  debuffDuration: 10
-  proc: 10
+  cooldown: 1
+  debuffDuration: 4
+  proc: 35
   timeTick: 1
   damageTick: 5
 --- !u!1 &8799171156574845798

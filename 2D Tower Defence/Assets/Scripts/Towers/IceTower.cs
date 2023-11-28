@@ -11,12 +11,15 @@ public class IceTower : Tower
 
     private void Start()
     {
+        base.SetRenderer();
         ElementType = Element.ICE;
 
         Upgrades = new TowerUpgrade[]
         {
-            new TowerUpgrade(2,1,1,2,10),
-            new TowerUpgrade(2,1,1,2,20)
+            // Lvl 2 Upgrade
+            new TowerUpgrade(6,3,1,0,5),
+            // Lvl 3 Upgrade
+            new TowerUpgrade(8,4,1,0,10)
         };
     }
 
@@ -27,13 +30,13 @@ public class IceTower : Tower
 
     public override string GetStats()
     {
-        if (NextUpgrade != null)  //If the next is avaliable
+        if (NextUpgrade != null)  //If next upgrade availabe, show this
         {
-            return String.Format("<color=#00ffffff>{0}</color>{1} \nSlowing factor: {2}% <color=#00ff00ff>+{3}</color>", "<size=20><b>Frost</b></size>", base.GetStats(), SlowingFactor, NextUpgrade.SlowingFactor);
+            return String.Format("<color=#1DDDFA>{0}</color>{1} \nFrost chance: {2}%", "<size=20><b>Ice</b></size>", base.GetStats(), Proc);
         }
 
-        //Returns the current upgrade
-        return String.Format("<color=#00ffffff>{0}</color>{1} \nSlowing factor: {2}%", "<size=20><b>Frost</b></size>", base.GetStats(), SlowingFactor);
+        // If no more upgrades, show this
+        return String.Format("<color=#1DDDFA>{0}</color>{1} \nFrost chance: {2}%", "<size=20><b>Ice</b></size>", base.GetStats(), Proc);
     }
 
     public override void Upgrade()

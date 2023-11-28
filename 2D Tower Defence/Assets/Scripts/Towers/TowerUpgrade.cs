@@ -41,4 +41,10 @@ public class TowerUpgrade
         this.TimeTick = timeTick;
         this.Price = price;
     }
+
+    public TowerUpgrade(int price, int damage)
+    {
+        this.Damage = damage;
+        this.Price = price;
+    }
 }

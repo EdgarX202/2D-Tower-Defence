@@ -97,7 +97,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         Currency = 100;   
-        Lives = 12;
+        Lives = 20;
     }
     private void Update()
     {

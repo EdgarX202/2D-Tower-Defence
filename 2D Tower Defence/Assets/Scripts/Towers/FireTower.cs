@@ -18,8 +18,10 @@ public class FireTower : Tower
 
         Upgrades = new TowerUpgrade[]
         {
-            new TowerUpgrade(2,2,.5f,5,-0.1f,1),
-            new TowerUpgrade(5,3,.5f,5,-0.1f,1)
+            // Lvl 2 Upgrade
+            new TowerUpgrade(6,4,1,0,1,3),
+            // Lvl 3 Upgrade
+            new TowerUpgrade(9,5,1,0,1,4)
         };
     }
     public override Debuff GetDebuff()
@@ -33,11 +35,11 @@ public class FireTower : Tower
         if (NextUpgrade != null)
         {
             // Return new upgrade stats
-            return string.Format("<color=#FF8500>{0}</color>{1} \nFlame damage: {2} <color=#00ff00ff>+{3}</color> \nFlame chance: {4} <color=#00ff00ff>+{5}</color>", "<size=20><b>Flame</b></size> ", base.GetStats(), DamageTick, NextUpgrade.SpecialDamage, Proc, NextUpgrade.Proc);
+            return string.Format("<color=#D93500>{0}</color>{1} \nFlame chance: {2}%", "<size=20><b>Flame</b></size> ", base.GetStats(), Proc);
         }
 
         // Return the current upgrade
-        return string.Format("<color=#FF8500>{0}</color>{1} \nDamage: {2}", "<size=20><b>Flame</b></size> ", base.GetStats(), DamageTick);
+        return string.Format("<color=#D93500>{0}</color>{1} \nFlame chance: {2}%", "<size=20><b>Flame</b></size> ", base.GetStats(), Proc);
     }
 
     public override void Upgrade()

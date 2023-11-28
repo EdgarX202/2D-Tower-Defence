@@ -19,8 +19,10 @@ public class PoisonTower : Tower
 
         Upgrades = new TowerUpgrade[]
         {
-            new TowerUpgrade(2,1,0.5f,0.1f,1),
-            new TowerUpgrade(5,1,0.5f,0.1f,1)
+            // Lvl 2 Upgrade
+            new TowerUpgrade(10,6,1,0,1,3),
+            // Lvl 3 Upgrade
+            new TowerUpgrade(12,9,1,0,1,6)
         };
     }
     public override Debuff GetDebuff()
@@ -30,12 +32,13 @@ public class PoisonTower : Tower
 
     public override string GetStats()
     {
-        if (NextUpgrade != null)
+        if (NextUpgrade != null) //If next upgrade availabe, show this
         {
-            return string.Format("<color=#B60AB8>{0}</color>{1} \nDrip damage: {2} <color=#00ff00ff>+{3}</color> \nDrip chance: {4}% <color=#00ff00ff>+{5}</color>", "<size=20><b>Poison</b></size>", base.GetStats(), SplashDamage, NextUpgrade.SpecialDamage, Proc, NextUpgrade.Proc);
+            return string.Format("<color=#B60AB8>{0}</color>{1} \nDrip chance: {2}%", "<size=20><b>Poison</b></size>", base.GetStats(), Proc);
         }
 
-        return string.Format("<color=#B60AB8>{0}</color>{1} \nDrip damage: {2}", "<size=20><b>Poison</b></size>", base.GetStats(), SplashDamage);
+        // If no more upgrades, show this
+        return string.Format("<color=#B60AB8>{0}</color>{1} \nDrip chance: {2}%", "<size=20><b>Poison</b></size>", base.GetStats(), Proc);
     }
 
     public override void Upgrade()

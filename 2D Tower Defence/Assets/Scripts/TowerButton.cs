@@ -54,24 +54,24 @@ public class TowerButton : MonoBehaviour
         {
             case "Flame":
                 FireTower flame = towerPrefab.GetComponentInChildren<FireTower>();
-                tooltip = string.Format("<color=#FF8500><size=20><b>Flame</b></size></color>\nDamage: {0} \nFlame chance: {1}% \n<color=#D3FBFB>Has a chance to deal \nadditional damage</color>", flame.Damage, flame.Proc);
+                tooltip = string.Format("<color=#D93500><size=20><b>Flame Tower</b></size></color>\nDamage: {0} \nFlame chance: {1}% \n<color=#D3FBFB>Has a chance to deal \nadditional damage</color>", flame.Damage, flame.Proc);
                     break;
             case "Poison":
                 PoisonTower poison = towerPrefab.GetComponentInChildren<PoisonTower>();
-                tooltip = string.Format("<color=#B60AB8><size=20><b>Poison</b></size></color>\nDamage: {0} \nDrip chance: {1}% \n<color=#D3FBFB>Target might leave \na poison drip</color>", poison.Damage, poison.Proc);
+                tooltip = string.Format("<color=#B60AB8><size=20><b>Poison Tower</b></size></color>\nDamage: {0} \nDrip chance: {1}% \n<color=#D3FBFB>Target might leave \na poison drip</color>", poison.Damage, poison.Proc);
                     break;
             case "Electric":
                 ElectricTower electric = towerPrefab.GetComponentInChildren<ElectricTower>();
-                tooltip = string.Format("<color=#FFE666><size=20><b>Electric</b></size></color>\nDamage: {0} \nElectric charge chance: {1}% \n<color=#D3FBFB>Has a chance to inflict damage \nto multiple targets</color>", electric.Damage, electric.Proc);
+                tooltip = string.Format("<color=#FFE666><size=20><b>Electric Tower</b></size></color>\nDamage: {0} \nElectric charge chance: {1}% \n<color=#D3FBFB>Has a chance to inflict damage \nto multiple targets</color>", electric.Damage, electric.Proc);
                     break;
             case "Ice":
                 IceTower ice = towerPrefab.GetComponentInChildren<IceTower>();
-                tooltip = string.Format("<color=#1D88FA><size=20><b>Ice</b></size></color>\nDamage: {0} \nFrost chance: {1}% \n<color=#D3FBFB>Has a chance to slow enemies down</color>", ice.Damage, ice.Proc);
+                tooltip = string.Format("<color=#1DDDFA><size=20><b>Ice Tower</b></size></color>\nDamage: {0} \nFrost chance: {1}% \n<color=#D3FBFB>Has a chance to slow enemies down</color>", ice.Damage, ice.Proc);
                     break;
-            //case "Normal":
-            //    IceTower ice = towerPrefab.GetComponentInChildren<IceTower>();
-            //    tooltip = string.Format("<color=#add8e6ff><size=20><b>Ice</b></size></color>\nDamage: {0} \nProc: {1}% \nDebuff duration: {2}sec \nSlowing effect: {3}% \n- Slow down effect", ice.Damage, ice.Proc, ice.DebuffDuration, ice.SlowingFactor);
-            //    break;
+            case "Normal":
+                NormalTower normal = towerPrefab.GetComponentInChildren<NormalTower>();
+                tooltip = string.Format("<color=#3BE87B><size=20><b>Regular Tower</b></size></color>\nDamage: {0} \n<color=#D3FBFB>No effects. Basic.</color>", normal.Damage);
+                break;
             default:
                     break;
         }
