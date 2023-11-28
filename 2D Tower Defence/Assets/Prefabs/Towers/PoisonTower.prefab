@@ -140,7 +140,7 @@ MonoBehaviour:
   debuffDuration: 5
   proc: 10
   _timeTick: 1
-  splashPrefab: {fileID: 5708878106781342705, guid: 1104893b028590e4c96284c71530eee5, type: 3}
+  splashPrefab: {fileID: 741994098576040087, guid: 09c9e8a49f8c6ae4585c8d1dcbe2a2eb, type: 3}
   _splashDamage: 5
 --- !u!1 &4458089375724545539
 GameObject:
