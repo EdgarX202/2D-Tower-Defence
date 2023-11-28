@@ -136,11 +136,11 @@ public abstract class Tower : MonoBehaviour
         if(NextUpgrade != null)
         {
             // Return new upgrade stats
-            return string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff> +{4}</color> \nProc: {2}% <color=#00ff00ff> +{5}%</color> \nDebuff: {3}sec <color=#00ff00ff> +{6}</color>", Level, damage, proc, debuffDuration, NextUpgrade.Damage, NextUpgrade.Proc, NextUpgrade.DebuffDuration);
+            return string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff> +{2}</color>", Level, damage, NextUpgrade.Damage);
         }
 
         // Return the current upgrade
-        return string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3}s", Level, damage, proc, debuffDuration);
+        return string.Format("\nLevel: {0} \nDamage: {1}", Level, damage);
     }
 
     private void Shoot()

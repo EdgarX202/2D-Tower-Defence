@@ -124,10 +124,10 @@ public class LevelManager : Singleton<LevelManager>
 
         for (int i = 0; i < 15; i++)
         {
-            int randX = random.Next(mapX);
-            int randY = random.Next(mapY);
+            int randX = random.Next(mapX-2);
+            int randY = random.Next(mapY - 1);
 
-            Vector3 obstaclePos = new Vector3(randX , randY - 2, 0f);
+            Vector3 obstaclePos = new Vector3(randX , randY, 0f);
             Instantiate(_obstacles[rand], obstaclePos, Quaternion.identity);
         }
     }
@@ -169,6 +169,7 @@ public class LevelManager : Singleton<LevelManager>
         Instantiate(_doorOutPrefab, Tiles[_doorOut].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
+    // Get the bounds of the map
     public bool InsideBounds(Point position)
     {
         return position.X >= 0 && position.Y >= 0 && position.X < _mapSize.X && position.Y < _mapSize.Y;

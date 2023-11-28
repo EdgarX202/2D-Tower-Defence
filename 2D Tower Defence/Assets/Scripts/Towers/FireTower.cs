@@ -33,11 +33,11 @@ public class FireTower : Tower
         if (NextUpgrade != null)
         {
             // Return new upgrade stats
-            return string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2} <color=#00ff00ff>{4}</color>\nTick damage: {3} <color=#00ff00ff>+{5}</color>", "<size=20><b>Fire</b></size> ", base.GetStats(), TimeTick, DamageTick, NextUpgrade.TimeTick, NextUpgrade.SpecialDamage);
+            return string.Format("<color=#FF8500>{0}</color>{1} \nFlame damage: {2} <color=#00ff00ff>+{3}</color> \nFlame chance: {4} <color=#00ff00ff>+{5}</color>", "<size=20><b>Flame</b></size> ", base.GetStats(), DamageTick, NextUpgrade.SpecialDamage, Proc, NextUpgrade.Proc);
         }
 
         // Return the current upgrade
-        return string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}\nTick damage: {3}", "<size=20><b>Fire</b></size> ", base.GetStats(), TimeTick, DamageTick);
+        return string.Format("<color=#FF8500>{0}</color>{1} \nDamage: {2}", "<size=20><b>Flame</b></size> ", base.GetStats(), DamageTick);
     }
 
     public override void Upgrade()

@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: PoisonBall
-  damage: 10
+  damage: 15
   projectileSpeed: 3
-  cooldown: 3
-  debuffDuration: 5
+  cooldown: 1
+  debuffDuration: 4
   proc: 10
   _timeTick: 1
   splashPrefab: {fileID: 741994098576040087, guid: 09c9e8a49f8c6ae4585c8d1dcbe2a2eb, type: 3}

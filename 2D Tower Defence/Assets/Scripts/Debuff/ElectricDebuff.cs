@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class ElectricDebuff : Debuff
 {
-    public ElectricDebuff(Enemy target) : base(target,1)
+    // Private
+    private float _damage;
+
+    // Constructor
+    public ElectricDebuff(float damage, Enemy target) : base(target,1)
     {
-        // Not yet implemented
+        this._damage = damage;
+    }
+
+    public override void Update()
+    {
+        
+        base.Update();
     }
 }
