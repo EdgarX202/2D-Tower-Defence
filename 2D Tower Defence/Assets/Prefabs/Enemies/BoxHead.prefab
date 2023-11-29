@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4212882312784957866}
   m_Layer: 0
   m_Name: BoxHead
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     bar: {fileID: 1743854062565637846}
     maxVal: 0
     currentVal: 0
-  elementType: 2
+  elementType: 0
 --- !u!61 &426455260834904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.013186961, y: 0.0039561093}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6043903, y: 0.73362285}
   m_EdgeRadius: 0
 --- !u!50 &4212882312784957866
 Rigidbody2D:
@@ -186,6 +186,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7721003579123011824}
     m_Modifications:
+    - target: {fileID: 1287672383729186138, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1919841061360618648, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -273,6 +277,10 @@ PrefabInstance:
     - target: {fileID: 3711137116809407988, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
       propertyPath: m_SortingOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410308407633923803, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
+      propertyPath: lerpSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7632396960092095141, guid: d7cac630b4c1fcb459ca4348aab5f280, type: 3}
       propertyPath: m_Name
