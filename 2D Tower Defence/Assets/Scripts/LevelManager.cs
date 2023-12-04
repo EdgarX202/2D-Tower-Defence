@@ -120,15 +120,20 @@ public class LevelManager : Singleton<LevelManager>
     // Spawn random obstacles on the map
     public void SpawnObstacles(int mapX, int mapY)
     {
-        int rand = random.Next(0, 2);
+        // Random obstacle
+        int randObs = random.Next(0, 2);
+        // Random amount of obstacles
+        int randAmount = random.Next(5, 21);
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < randAmount; i++)
         {
-            int randX = random.Next(mapX-2);
-            int randY = random.Next(mapY - 1);
-
+            // Random positions
+            int randX = random.Next(1,15); 
+            int randY = random.Next(1,7); 
             Vector3 obstaclePos = new Vector3(randX , randY, 0f);
-            Instantiate(_obstacles[rand], obstaclePos, Quaternion.identity);
+
+            // Instantiate obstacles
+            Instantiate(_obstacles[randObs], obstaclePos, Quaternion.identity);
         }
     }
 
@@ -151,6 +156,7 @@ public class LevelManager : Singleton<LevelManager>
         return data.Split('-');
     }
 
+    // Spawning Entrance/Exit
     private void SpawnDoors()
     {
         // Random Y position for entrance/exit
@@ -162,10 +168,11 @@ public class LevelManager : Singleton<LevelManager>
         // Spawn at the end of the round
         _doorOut = new Point(17, doorOutRand);
 
+        // Instantiate entrance
         GameObject entrance = Instantiate(_doorInPrefab, Tiles[_doorIn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         Entrance = entrance.GetComponent<EnemyEntrance>();
         Entrance.name = "door_in";
-
+        // Instantiate exit
         Instantiate(_doorOutPrefab, Tiles[_doorOut].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
