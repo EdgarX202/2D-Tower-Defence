@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    // Private
     private Enemy target;
     private Tower parent;
     private Element elementType;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -21,6 +16,7 @@ public class Projectile : MonoBehaviour
         MoveToTarget();
     }
 
+    // Initialise target, parent and element type
     public void Initialize(Tower parent)
     {
         this.target = parent.Target;
@@ -28,10 +24,13 @@ public class Projectile : MonoBehaviour
         this.elementType = parent.ElementType;
     }
 
+    // Move projectile towards the enemy
     private void MoveToTarget()
     {
+        // If target is not null and active
         if(target != null && target.IsActive)
         {
+            // Move towards the target
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * parent.ProjectileSpeed);
         }
         else if (!target.IsActive)
@@ -41,6 +40,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    // Apply debuff to the target
     private void ApplyDebuff()
     {
         // If projectile element type is different from target element type
@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-
+    // Do damage and apply debuff if the enemy is hit
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // If the enemy is hit
@@ -66,10 +66,11 @@ public class Projectile : MonoBehaviour
         {
             if(target.gameObject == collision.gameObject)
             {
+                // Do damage
                 target.TakeDamage(parent.Damage, elementType);
-
+                // Reset projectile
                 GameManager.Instance.Pool.ObjectReset(gameObject);
-
+                // Apply debuff
                 ApplyDebuff();
             }
         }

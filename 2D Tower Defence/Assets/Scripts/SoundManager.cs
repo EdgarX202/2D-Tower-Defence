@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class SoundManager : Singleton<SoundManager>
 {
+    // Serialised Fields
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource effectsSource;
     [SerializeField] private Slider musicSlider;
@@ -14,6 +15,7 @@ public class SoundManager : Singleton<SoundManager>
     // Start is called before the first frame update
     void Start()
     {
+        // Load audio clips from the folder
         AudioClip[] clips = Resources.LoadAll<AudioClip>("Audio") as AudioClip[];
 
         // Run through audio clips and add them to dictionary
@@ -24,15 +26,18 @@ public class SoundManager : Singleton<SoundManager>
 
         LoadVolume();
 
+        // Adjust volume sliders
         musicSlider.onValueChanged.AddListener(delegate { UpdateVolume(); });
         effectsSlider.onValueChanged.AddListener(delegate { UpdateVolume(); });
     }
 
+    // Plays a sound effect once
     public void PlaysEffects(string name)
     {
         effectsSource.PlayOneShot(audioClips[name]);
     }
 
+    // Adjust and save volume settings in PlayerPrefs
     public void UpdateVolume()
     {
         // Update the volume when slider are adjusted
@@ -44,6 +49,7 @@ public class SoundManager : Singleton<SoundManager>
         PlayerPrefs.SetFloat("Music", musicSlider.value);
     }
 
+    // Load volume settings when the game is started next time
     public void LoadVolume()
     {
         // Store volume

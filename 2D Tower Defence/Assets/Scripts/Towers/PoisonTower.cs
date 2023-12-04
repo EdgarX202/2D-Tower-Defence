@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PoisonTower : Tower
 {
+    // Serialised Fields
     [SerializeField] private float _timeTick;
-    [SerializeField] private PoisonSplash splashPrefab;
+    [SerializeField] private PoisonSplash _splashPrefab;
     [SerializeField] private int _splashDamage;
 
     // Properties
@@ -15,8 +16,11 @@ public class PoisonTower : Tower
     private void Start()
     {
         base.SetRenderer();
+
+        // Type of the tower
         ElementType = Element.POISON;
 
+        // Tower upgrades
         Upgrades = new TowerUpgrade[]
         {
             // Lvl 2 Upgrade
@@ -25,9 +29,10 @@ public class PoisonTower : Tower
             new TowerUpgrade(12,9,1,0,1,6)
         };
     }
+
     public override Debuff GetDebuff()
     {
-        return new PoisonDebuff(_splashDamage, _timeTick, splashPrefab, DebuffDuration, Target);
+        return new PoisonDebuff(_splashDamage, _timeTick, _splashPrefab, DebuffDuration, Target);
     }
 
     public override string GetStats()

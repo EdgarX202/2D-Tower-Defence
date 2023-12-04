@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class Hover : Singleton<Hover>
 {
+    // Private
     private SpriteRenderer spriteRenderer;
     private SpriteRenderer rangeSpriteRen;
 
+    // Properties
     public bool isVisible { get; private set; }
 
     private void Start()
@@ -23,9 +25,7 @@ public class Hover : Singleton<Hover>
         FollowMouse();
     }
 
-    /// <summary>
-    /// Hover icon follow mouse pointer
-    /// </summary>
+    // Hover icon follow mouse pointer
     private void FollowMouse()
     {
         if (spriteRenderer.enabled)
@@ -37,10 +37,7 @@ public class Hover : Singleton<Hover>
         }
     }
 
-    /// <summary>
-    /// Activate hover icon
-    /// </summary>
-    /// <param name="sprite"></param>
+    // Activate hover icon
     public void Activate(Sprite sprite)
     {
         // Set the sprite
@@ -51,9 +48,7 @@ public class Hover : Singleton<Hover>
         isVisible = true;
     }
 
-    /// <summary>
-    /// Deactivate hover icon
-    /// </summary>
+    // Deactivate hover icon
     public void Deactivate()
     {
         // Disable sprite renderer

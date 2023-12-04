@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class FireTower : Tower
 {
-    [SerializeField] private float timeTick;
-    [SerializeField] private float damageTick;
+    // Serialised Fields
+    [SerializeField] private float _timeTick;
+    [SerializeField] private float _damageTick;
 
     // Properties
-    public float TimeTick { get { return timeTick; } }
-    public float DamageTick { get { return damageTick; } }
+    public float TimeTick { get { return _timeTick; } }
+    public float DamageTick { get { return _damageTick; } }
 
     private void Start()
     {
         base.SetRenderer();
+
+        // Type of the tower
         ElementType = Element.FLAME;
 
+        // Tower upgrades
         Upgrades = new TowerUpgrade[]
         {
             // Lvl 2 Upgrade
@@ -24,9 +28,10 @@ public class FireTower : Tower
             new TowerUpgrade(9,5,1,0,1,4)
         };
     }
+
     public override Debuff GetDebuff()
     {
-        return new FlameDebuff(DamageTick, timeTick, DebuffDuration, Target);
+        return new FlameDebuff(DamageTick, _timeTick, DebuffDuration, Target);
     }
 
     public override string GetStats()
@@ -45,8 +50,8 @@ public class FireTower : Tower
     public override void Upgrade()
     {
         // Increase damage, reduce tick time
-        this.timeTick -= NextUpgrade.TimeTick;
-        this.damageTick += NextUpgrade.SpecialDamage;
+        this._timeTick -= NextUpgrade.TimeTick;
+        this._damageTick += NextUpgrade.SpecialDamage;
         base.Upgrade();
     }
 }

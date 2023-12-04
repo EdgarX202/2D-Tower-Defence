@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
-// ENUM for tower effects
+// ENUM for tower effects/types
 public enum Element
 {
     ELECTRIC, POISON, FLAME, ICE, NONE
@@ -12,17 +12,6 @@ public enum Element
 
 public abstract class Tower : MonoBehaviour
 {
-    // Private
-    private SpriteRenderer spriteRenderer;
-
-    private Enemy target;
-
-    private Queue<Enemy> enemies = new Queue<Enemy>();
-
-    private bool canAttack = true;
-    private float attackTime;
-    private int level; // Towers current level
-
     // Serialized fields
     [SerializeField] private string projectileType;
     [SerializeField] private int damage;
@@ -30,6 +19,15 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] private float cooldown;
     [SerializeField] private float debuffDuration;
     [SerializeField] private float proc; // Programmed random occurance - random event triggered by specific action/condition
+
+    // Private
+    private SpriteRenderer spriteRenderer;
+    private Enemy target;
+    private Queue<Enemy> enemies = new Queue<Enemy>();
+
+    private bool canAttack = true;
+    private float attackTime = 0;
+    private int level; // Towers current level
 
     // Properties
     public float ProjectileSpeed { get { return projectileSpeed; } }
@@ -64,6 +62,7 @@ public abstract class Tower : MonoBehaviour
 
     private void Awake()
     {
+        // Starting tower level
         Level = 1;
     }
 
@@ -71,6 +70,7 @@ public abstract class Tower : MonoBehaviour
     {
         SetRenderer();
     }
+
     private void Update()
     {
         Attack();
@@ -79,28 +79,30 @@ public abstract class Tower : MonoBehaviour
         //Debug.Log(target);
     }
 
+    // Selected tower
     public void Select()
     {
         // Enable-Disable spriteRenderer
         spriteRenderer.enabled = !spriteRenderer.enabled;
-
         GameManager.Instance.UpdateUpgradeTooltip();
     }
 
+    // Sprite renderer
     public void SetRenderer()
     {
         // Reference to sprite renderer
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    // Tower can shoot
     private void Attack()
     {
-        if(!canAttack)
+        if (!canAttack)
         {
             attackTime += Time.deltaTime;
 
             // When attack time is larger than cooldown, a tower can shoot again, set the time back to 0
-            if(attackTime >= cooldown)
+            if (attackTime >= cooldown)
             {
                 canAttack = true;
                 attackTime = 0;
@@ -143,6 +145,7 @@ public abstract class Tower : MonoBehaviour
         return string.Format("\nLevel: {0} \nDamage: {1}", Level, damage);
     }
 
+    // Shoot projectile
     private void Shoot()
     {
         // Get the projectile from object pool
@@ -153,6 +156,7 @@ public abstract class Tower : MonoBehaviour
         projectile.Initialize(this);
     }
 
+    // Enque enemy when in range
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
@@ -165,6 +169,7 @@ public abstract class Tower : MonoBehaviour
     // Return debuff of a specific type
     public abstract Debuff GetDebuff();
 
+    // Target = null
     public void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
@@ -173,6 +178,7 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
+    // Upgrading the tower
     public virtual void Upgrade()
     {
         // Reduce players money after buying an upgrade

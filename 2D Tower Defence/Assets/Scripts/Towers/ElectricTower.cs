@@ -6,17 +6,20 @@ public class ElectricTower : Tower
 {
     // Serialised fields
     [SerializeField] private float timeTick;
-    [SerializeField] private float _damage;
+    [SerializeField] private float _electricDamage;
 
     // Properties
     public float TimeTick { get { return timeTick; } }
-    public float DamageTick { get { return _damage; } }
+    public float DamageTick { get { return _electricDamage; } }
 
     private void Start()
     {
         base.SetRenderer();
+        
+        // Type of the tower
         ElementType = Element.ELECTRIC;
 
+        // Upgrades available
         Upgrades = new TowerUpgrade[]
         {
             // Lvl 2 Upgrade
@@ -26,6 +29,7 @@ public class ElectricTower : Tower
          };
 
     }
+
     public override Debuff GetDebuff()
     {
         return new ElectricDebuff(DamageTick, Target);

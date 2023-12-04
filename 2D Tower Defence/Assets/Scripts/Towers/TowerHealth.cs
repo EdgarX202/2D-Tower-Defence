@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TowerHealth : MonoBehaviour
 {
+    /*
+     * Script for tower health - NOT IMPLEMENTED YET
+     */
+
     [SerializeField] private Stats health;
 
     public bool IsAlive

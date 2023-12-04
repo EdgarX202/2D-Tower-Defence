@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class HBar : MonoBehaviour
 {
-    private float fillAmount;
-
+    // Serialised Fields
     [SerializeField] private float lerpSpeed;
     [SerializeField] private Image content;
     [SerializeField] private Color fullColor;
     [SerializeField] private Color lowColor;
+
+    // Private
+    private float fillAmount;
 
     // Properties
     public float MaxValue { get; set; }
@@ -22,18 +24,13 @@ public class HBar : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         HandleBar();
     }
 
+    // Handle Lerp and colour change
     private void HandleBar()
     {
         if (fillAmount != content.fillAmount)
@@ -41,6 +38,7 @@ public class HBar : MonoBehaviour
             content.fillAmount = Mathf.Lerp(content.fillAmount, fillAmount, Time.deltaTime * lerpSpeed);
         }
 
+        // Change colour depending on how much left
         content.color = Color.Lerp(lowColor, fullColor, fillAmount);
     }
 

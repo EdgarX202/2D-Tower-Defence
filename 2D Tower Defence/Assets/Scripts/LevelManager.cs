@@ -43,13 +43,11 @@ public class LevelManager : Singleton<LevelManager>
             return new Stack<Node>(new Stack<Node>(_enemyPath));
         }
     }
-
     public float TileSize
     {
         // Get the tile width and return as a float
         get { return _tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
-
     public Point DoorOut
     {
         get
@@ -57,7 +55,6 @@ public class LevelManager : Singleton<LevelManager>
             return _doorOut;
         }
     }
-
     public Point DoorIn
     {
         get
@@ -65,7 +62,6 @@ public class LevelManager : Singleton<LevelManager>
             return _doorIn;
         }
     }
-
     public Point Obstacle
     {
         get
@@ -73,7 +69,6 @@ public class LevelManager : Singleton<LevelManager>
             return _obstacle;
         }
     }
-
     public Dictionary<Point, TileScript> Tiles { get; set; }
     public EnemyEntrance Entrance { get; set; }
 
@@ -83,12 +78,15 @@ public class LevelManager : Singleton<LevelManager>
         CreateLevel();
     }
 
+    // Create level, tiles, obstacles, entrance/exit
     private void CreateLevel()
     {
         Tiles = new Dictionary<Point, TileScript>();
 
+        // Data from text file for the map
         string[] mapData = ReadLevelTxt();
 
+        // Get map size
         _mapSize = new Point(mapData[0].ToCharArray().Length, mapData.Length);
 
         // Calculate x and y map size
@@ -97,10 +95,10 @@ public class LevelManager : Singleton<LevelManager>
 
         Vector3 maxTile = Vector3.zero;
 
-        // Calculate world start point. Top Left
+        // Calculate world start point. Top Left - so that the camera aligns with the edge of the map
         Vector3 worldStartPos = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
-        // Create tile on x and y positions
+        // Create tiles on x and y positions
         for(int y = 0; y < mapYSize; y++)
         {
             char[] newTiles = mapData[y].ToCharArray();
@@ -113,12 +111,13 @@ public class LevelManager : Singleton<LevelManager>
 
         maxTile = Tiles[new Point(mapXSize-1, mapYSize-1)].transform.position;
 
+        // Spawn entrance/exit and obstacles
         SpawnDoors();
-        SpawnObstacles(mapXSize, mapYSize);
+        SpawnObstacles();
     }
 
     // Spawn random obstacles on the map
-    public void SpawnObstacles(int mapX, int mapY)
+    public void SpawnObstacles()
     {
         // Random obstacle
         int randObs = random.Next(0, 2);
@@ -137,6 +136,7 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    // Placing tiles next to each other
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStartPos)
     {
         // Parse to int to use indexer when creating a enw tile
@@ -147,12 +147,14 @@ public class LevelManager : Singleton<LevelManager>
         newTile.Setup(new Point(x,y), new Vector3(worldStartPos.x + (TileSize * x), worldStartPos.y - (TileSize * y), 0), _map);
     }
 
+    // Read level data from a text file
     private string[] ReadLevelTxt()
     {
+        // Load text document where the level is stored
         TextAsset bindData = Resources.Load("Level") as TextAsset;
-
+        // Replace new line characters with empty string
         string data = bindData.text.Replace(Environment.NewLine, string.Empty);
-
+        // Split the data string into an array of strings using '-' as the delimiter
         return data.Split('-');
     }
 
@@ -182,6 +184,7 @@ public class LevelManager : Singleton<LevelManager>
         return position.X >= 0 && position.Y >= 0 && position.X < _mapSize.X && position.Y < _mapSize.Y;
     }
 
+    // Generate enemy path
     public void GeneratePath()
     {
         _enemyPath = AStar.GetPath(_doorIn, _doorOut);

@@ -140,7 +140,7 @@ MonoBehaviour:
   debuffDuration: 5
   proc: 30
   timeTick: 1
-  _damage: 5
+  _electricDamage: 0
 --- !u!1 &5587555217073251196
 GameObject:
   m_ObjectHideFlags: 0

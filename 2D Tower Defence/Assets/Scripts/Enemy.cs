@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // Serialised fields
     [SerializeField] private float enemySpeed;
     [SerializeField] private Stats health;
     [SerializeField] private Element elementType;
 
-    private Stack<Node> enemyPath;
-    private Vector3 destination;
-    private SpriteRenderer spriteRenderer;
+    // Private
     private int invulnerability = 2;
+    private Vector3 destination;
+    private Stack<Node> enemyPath;
+    private SpriteRenderer spriteRenderer;
     private List<Debuff> debuffs = new List<Debuff>();
     private List<Debuff> debuffsToRemove = new List<Debuff>();
     private List<Debuff> newDebuffs = new List<Debuff>();
@@ -38,16 +40,19 @@ public class Enemy : MonoBehaviour
         MaxSpeed = enemySpeed;
         health.Initialize();  
     }
+
     private void Start()
     {
         IsActive = true;
     }
+
     private void Update()
     {
         HandleDebuff();
         EnemyMove();
     }
 
+    // Spawn enemy settings
     public void Spawn(int health)
     {
         // Remove all exisitng debuffs
@@ -55,6 +60,7 @@ public class Enemy : MonoBehaviour
 
         // Setting spawn position to where the entrance is
         transform.position = LevelManager.Instance.Entrance.transform.position;
+        // Health settings
         this.health.Bar.ResetBar();
         this.health.MaxVal = health;
         this.health.CurrentVal = this.health.MaxVal;
@@ -62,6 +68,7 @@ public class Enemy : MonoBehaviour
         SetPath(LevelManager.Instance.EnemyPath);
     }
 
+    // Move eemy from A to B
     private void EnemyMove()
     {
         if(IsActive)
@@ -82,6 +89,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Setting enemy path
     private void SetPath(Stack<Node> newPath)
     {
         if(newPath != null)
@@ -95,6 +103,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Reduce player lives when enemy collides with the target
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if( collision.tag == "Exit")
@@ -110,7 +119,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Reset enemy stats on exit and make it re-usable
+    // Reset enemy stats on exit and make it re-usable (object pooling)
     private void ResetEnemy()
     {
         // Clear all debuffs
@@ -126,26 +135,30 @@ public class Enemy : MonoBehaviour
         GameManager.Instance.EnemyRemove(this);
     }
 
+    // Reduce enemy health
     public void TakeDamage(float damage, Element damageSource)
     {
         if (IsActive)
         {
+            // The enemy can be resistant to certain tower types and take less damage
             if(damageSource == elementType)
             {
-                // To make sure not to deal too much damage
+                // Deal half the original damage amount
                 damage /= invulnerability;
+                // Increase resistance
                 invulnerability++;
             }
 
             // Reduce health
             health.CurrentVal -= damage;
 
+            // If out of health, remove the enemy and give coins to the player
             if (health.CurrentVal <= 0 )
             {
                 SoundManager.Instance.PlaysEffects("damage");
 
-                // Get some money for killing an enemy
-                GameManager.Instance.Currency += 2;
+                // Player receives coins for killing an enemy
+                GameManager.Instance.Currency += 5;
 
                 GameManager.Instance.Pool.ObjectReset(gameObject);
                 GameManager.Instance.EnemyRemove(this);
@@ -155,6 +168,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Adding debuff to an enemy
     public void AddDebuff(Debuff debuff)
     {
         // Check the list of debuffs and everytime we find an element, call x
@@ -166,13 +180,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Remove debuff from enemy once no longer needed
     public void RemoveDebuff(Debuff debuff)
     {
         // Add debuffs needed to be removed to the list
         debuffsToRemove.Add(debuff);
     }
 
-    // Add and remove debuffs accordingally, then update.
+    // Add, remove, update debuffs accordingally.
     public void HandleDebuff()
     {
         // If there are new debuffs

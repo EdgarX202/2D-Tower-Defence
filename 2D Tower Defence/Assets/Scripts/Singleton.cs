@@ -4,8 +4,11 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance;
+    /*
+     * SINGLETON DESIGN PATTERN - ENSURING ONLY ONE INSTANCE OF A CLASS IS CREATED
+     */
 
+    private static T _instance;
     public static T Instance
     {
         get

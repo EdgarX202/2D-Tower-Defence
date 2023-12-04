@@ -9,21 +9,6 @@ public delegate void ChangeOfCurrency();
 
 public class GameManager : Singleton<GameManager>
 {
-    // Event is triggered when the currency changes
-    public event ChangeOfCurrency ChangeC;
-
-    private Tower selectedTower;
-
-    // Keep the count of active enemies
-    private List<Enemy> activeEnemies = new List<Enemy>();
-
-    // Private
-    private int _currency;
-    private int _health = 100;
-    private int _wave = 0;
-    private int _lives;
-    private bool _gameOver = false;
-
     // Serialized fields
     [Header("Text Fields")]
     [SerializeField] private TextMeshProUGUI livesTxt;
@@ -39,6 +24,21 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject waveBtn;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
+
+    // Event is triggered when the currency changes
+    public event ChangeOfCurrency ChangeC;
+
+    private Tower selectedTower;
+
+    // Keep the count of active enemies
+    private List<Enemy> activeEnemies = new List<Enemy>();
+
+    // Private
+    private int _currency;
+    private int _health = 100;
+    private int _wave = 0;
+    private int _lives;
+    private bool _gameOver = false;
 
     // Properties
     public TowerButton ClickedBtn { get; set; }
@@ -91,7 +91,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        Currency = 100;   
+        Currency = 150;   
         Lives = 20;
     }
 

@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
+    // Private
+    private SpriteRenderer spriteRenderer;
+    private Tower myTower;
+
+    private Color32 fullColour = new Color32(255, 118, 118, 255); // RED
+    private Color32 emptyColour = new Color32(96, 255, 90, 255); // GREEN
+    
     // Properties
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; set; }
     public bool Debugging { get; set; }
     public bool Walkable { get; set; }
-
-    private SpriteRenderer spriteRenderer;
-
-    private Tower myTower;
-
-    private Color32 fullColour = new Color32(255, 118, 118, 255); // RED
-    private Color32 emptyColour = new Color32(96, 255, 90, 255); // GREEN
-
-
     public Vector2 WorldPosition
     {
         get {
@@ -44,18 +44,21 @@ public class TileScript : MonoBehaviour
         LevelManager.Instance.Tiles.Add(gridPos, this);
     }
 
+    // Select/Deselect or place the tower on a tile
     private void OnMouseOver()
     {
         // Check grip position index
         //Debug.Log(GridPosition.X + ", " + GridPosition.Y);
 
+        // Check if the mouse is over a UI element
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn != null)
         {
+            // If the GameManager has a selected tower
             if (IsEmpty && !Debugging)
             {
+                // Set the tile colour
                 TileColour(emptyColour);
             }
-
             if(!IsEmpty && !Debugging)
             {
                 TileColour(fullColour);
@@ -68,12 +71,15 @@ public class TileScript : MonoBehaviour
         }
         else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn == null && Input.GetMouseButton(0))
         {
-            if(myTower != null)
+            // If the GameManager does not have a selected tower
+            if (myTower != null)
             {
+                // Select the tower on that tile if it has a tower
                 GameManager.Instance.SelectTower(myTower);
             }
             else
             {
+                // Deselect any selected towers if there's no tower on that tile
                 GameManager.Instance.DeselectTower();
             }
         }
@@ -87,6 +93,7 @@ public class TileScript : MonoBehaviour
         }
     }
 
+    // Check if path doesnt exist and place tower
     private void PlaceTower()
     {
         Walkable = false;

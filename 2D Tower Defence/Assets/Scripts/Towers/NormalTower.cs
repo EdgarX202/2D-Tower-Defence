@@ -5,13 +5,14 @@ using System;
 
 public class NormalTower : Tower
 {
-
-
     private void Start()
     {
         base.SetRenderer();
+
+        // Type of the tower
         ElementType = Element.NONE;
 
+        // Tower upgrades
         Upgrades = new TowerUpgrade[]
         {
             // Lvl 2 Upgrade

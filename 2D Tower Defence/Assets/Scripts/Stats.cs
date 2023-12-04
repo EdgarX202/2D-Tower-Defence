@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class Stats
 {
+    // Serialised Fields
     [SerializeField] private HBar bar;
     [SerializeField] private float maxVal;
     [SerializeField] private float currentVal;
@@ -20,7 +21,6 @@ public class Stats
             bar.Value = currentVal;
         }
     }
-
     public float MaxVal
     {
         get { return maxVal; }
@@ -30,12 +30,12 @@ public class Stats
             bar.MaxValue = maxVal;
         }
     }
-
     public HBar Bar
     {
         get { return bar; }
     }
 
+    // Initialise max and current values
     public void Initialize()
     {
         this.MaxVal = maxVal;

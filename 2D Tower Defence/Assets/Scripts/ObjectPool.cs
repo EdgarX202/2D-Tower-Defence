@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    // Serialised Fields
     [SerializeField] private GameObject[] objectPoolPrefabs;
 
+    // Lists
     private List<GameObject> poolObject = new List<GameObject>();
 
+    // Activate/Instantiate pool objects
     public GameObject getObject(string type)
     {
+        // Check if object is in the pool and not active
         foreach (GameObject obj in poolObject)
         {
             if(obj.name == type && !obj.activeInHierarchy)
             {
+                // Make the object active
                 obj.SetActive(true);
                 return obj;
             }
@@ -36,6 +41,7 @@ public class ObjectPool : MonoBehaviour
         return null;
     }
 
+    // Make the object inactive
     public void ObjectReset(GameObject gameObj)
     {
         gameObj.SetActive(false);

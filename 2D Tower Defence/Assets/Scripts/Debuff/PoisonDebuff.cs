@@ -39,6 +39,7 @@ public class PoisonDebuff : Debuff
     // Instantiate poison prefab
     private void Splash()
     {
+        // Drip prefab
         PoisonSplash tmp = GameObject.Instantiate(_splashPrefab, target.transform.position, Quaternion.identity);
 
         tmp.Damage = _splashDamage;

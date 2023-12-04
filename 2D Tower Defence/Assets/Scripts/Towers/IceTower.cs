@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class IceTower : Tower
 {
+    // Serialised Fields
     [SerializeField] private float _slowingFactor;
 
+    // Properties
     public float SlowingFactor { get { return _slowingFactor; } }
 
     private void Start()
     {
         base.SetRenderer();
+
+        // Type of the tower
         ElementType = Element.ICE;
 
+        // Tower upgrades
         Upgrades = new TowerUpgrade[]
         {
             // Lvl 2 Upgrade

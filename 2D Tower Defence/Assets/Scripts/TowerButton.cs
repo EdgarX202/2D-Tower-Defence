@@ -18,16 +18,15 @@ public class TowerButton : MonoBehaviour
     {
         get { return price; }
     }
+    public GameObject TowerPrefab
+        {
+            get { return towerPrefab; }
+        }
 
     private void Start()
     {
         priceTxt.text = price.ToString();
         GameManager.Instance.ChangeC += new ChangeOfCurrency(PriceCheck);
-    }
-
-    public GameObject TowerPrefab
-    {
-        get { return towerPrefab; }
     }
 
     // If the player doesnt have enough currency, grey out the button
@@ -45,7 +44,7 @@ public class TowerButton : MonoBehaviour
         }
     }
 
-    // Show information in the tooltip
+    // Show tower information in the tooltip
     public void ShowInformation(string type)
     {
         string tooltip = string.Empty;
