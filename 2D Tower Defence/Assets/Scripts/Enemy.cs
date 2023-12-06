@@ -1,25 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     // Serialised fields
+    [SerializeField] private string projectileType;
     [SerializeField] private float enemySpeed;
     [SerializeField] private Stats health;
+    [SerializeField] private int damage;
     [SerializeField] private Element elementType;
+    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float cooldown;
 
     // Private
     private int invulnerability = 2;
     private Vector3 destination;
+    private Tower target;
     private Stack<Node> enemyPath;
     private SpriteRenderer spriteRenderer;
     private List<Debuff> debuffs = new List<Debuff>();
     private List<Debuff> debuffsToRemove = new List<Debuff>();
     private List<Debuff> newDebuffs = new List<Debuff>();
+    private bool canAttack = true;
+    private float attackTime = 0;
+    private Queue<Tower> enemies = new Queue<Tower>();
 
     // Properties
+    public Tower Target { get { return target; } }
     public Point GridPosition { get; set; }
+    public float ProjectileSpeed { get { return projectileSpeed; } }
     public bool IsActive { get; set; }
     public float MaxSpeed { get; set; }
     public bool IsAlive
@@ -33,6 +44,7 @@ public class Enemy : MonoBehaviour
         get { return enemySpeed; }
         set { this.enemySpeed = value; }
     }
+    public int Damage { get { return damage; } }
 
     private void Awake()
     {
@@ -50,6 +62,7 @@ public class Enemy : MonoBehaviour
     {
         HandleDebuff();
         EnemyMove();
+        Attack();
     }
 
     // Spawn enemy settings
@@ -68,7 +81,7 @@ public class Enemy : MonoBehaviour
         SetPath(LevelManager.Instance.EnemyPath);
     }
 
-    // Move eemy from A to B
+    // Move enemy from A to B
     private void EnemyMove()
     {
         if(IsActive)
@@ -133,6 +146,55 @@ public class Enemy : MonoBehaviour
         // Remove and reset the enemy from the game
         GameManager.Instance.Pool.ObjectReset(gameObject);
         GameManager.Instance.EnemyRemove(this);
+    }
+
+
+    // Tower can shoot
+    private void Attack()
+    {
+        if (!canAttack)
+        {
+            attackTime += Time.deltaTime;
+
+            // When attack time is larger than cooldown, a tower can shoot again, set the time back to 0
+            if (attackTime >= cooldown)
+            {
+                canAttack = true;
+                attackTime = 0;
+            }
+        }
+
+        if (target == null && enemies.Count > 0 && enemies.Peek().IsActive)
+        {
+            // Remove the enemy that left towers range from queue
+            target = enemies.Dequeue();
+        }
+
+        // If the target is in range and active, shoot once
+        if (target != null && target.IsActive)
+        {
+            if (canAttack)
+            {
+                Shoot();
+                canAttack = false;
+            }
+        }
+
+        if (target != null || target != null && target.IsActive)
+        {
+            target = null;
+        }
+    }
+
+    // Shoot projectile
+    private void Shoot()
+    {
+        // Get the projectile from object pool
+        EnemyProjectile projectile = GameManager.Instance.Pool.getObject(projectileType).GetComponent<EnemyProjectile>();
+
+        // Spawn in the middle of the tower
+        projectile.transform.position = transform.position;
+        projectile.Initialize(this);
     }
 
     // Reduce enemy health

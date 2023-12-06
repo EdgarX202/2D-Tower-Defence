@@ -15,18 +15,19 @@ public class AStarDebug : MonoBehaviour
 
 
     // Debug Update()
-    /*
+    
     void Update()
     {
         //ClickTile();
 
-        // Generate path between 2 points
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AStar.GetPath(_start.GridPosition, _goal.GridPosition);
-        }
+        //// Generate path between 2 points
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    AStar.GetPath(_start.GridPosition, _goal.GridPosition);
+        //}
+
     }
-    */
+    
 
     // Selecting start and exit by using mouse click
     private void ClickTile()

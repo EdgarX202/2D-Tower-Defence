@@ -140,7 +140,7 @@ MonoBehaviour:
   debuffDuration: 4
   proc: 40
   _timeTick: 1
-  splashPrefab: {fileID: 741994098576040087, guid: 09c9e8a49f8c6ae4585c8d1dcbe2a2eb, type: 3}
+  _splashPrefab: {fileID: 741994098576040087, guid: 09c9e8a49f8c6ae4585c8d1dcbe2a2eb, type: 3}
   _splashDamage: 8
 --- !u!1 &4458089375724545539
 GameObject:
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 7075639328983526144}
   m_Layer: 0
   m_Name: PoisonTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

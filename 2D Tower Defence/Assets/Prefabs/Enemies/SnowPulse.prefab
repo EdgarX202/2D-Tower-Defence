@@ -100,12 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c6b1a3ae7338b41b22fbb656a97527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileType: enemyProjectile
   enemySpeed: 1
   health:
     bar: {fileID: 9147421425679631817}
     maxVal: 0
     currentVal: 0
+  damage: 0
   elementType: 1
+  projectileSpeed: 3
+  cooldown: 1
 --- !u!50 &5787740181157392519
 Rigidbody2D:
   serializedVersion: 4

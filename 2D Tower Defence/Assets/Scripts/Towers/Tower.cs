@@ -33,6 +33,7 @@ public abstract class Tower : MonoBehaviour
     public float ProjectileSpeed { get { return projectileSpeed; } }
     public TowerUpgrade[] Upgrades { get; protected set; }
     public Enemy Target { get { return target; } }
+    public bool IsActive { get; set; }
     public int Damage { get { return damage; } }
     public int Price { get; set; }
     public Element ElementType { get; protected set; }
@@ -68,15 +69,13 @@ public abstract class Tower : MonoBehaviour
 
     private void Start()
     {
+        IsActive = true;
         SetRenderer();
     }
 
     private void Update()
     {
         Attack();
-
-        // Check which target is in range or null
-        //Debug.Log(target);
     }
 
     // Selected tower

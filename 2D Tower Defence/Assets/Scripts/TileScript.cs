@@ -8,8 +8,10 @@ using UnityEngine.EventSystems;
 public class TileScript : MonoBehaviour
 {
     // Private
+    private LevelManager levelManager;
     private SpriteRenderer spriteRenderer;
     private Tower myTower;
+    private int health = 15;
 
     private Color32 fullColour = new Color32(255, 118, 118, 255); // RED
     private Color32 emptyColour = new Color32(96, 255, 90, 255); // GREEN
@@ -101,6 +103,7 @@ public class TileScript : MonoBehaviour
         if(AStar.GetPath(LevelManager.Instance.DoorIn, LevelManager.Instance.DoorOut) == null)
         {
             // There is no path
+            levelManager.GetComponent<LevelManager>().isWalkable = false;
             Walkable = true;
             return;
         }

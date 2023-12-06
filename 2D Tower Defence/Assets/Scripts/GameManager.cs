@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager>
 
     // Private
     private int _currency;
-    private int _health = 100;
+    private int _health = 50; // Enemies health
     private int _wave = 0;
     private int _lives;
     private bool _gameOver = false;
@@ -91,6 +91,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        // Player stats
         Currency = 150;   
         Lives = 20;
     }

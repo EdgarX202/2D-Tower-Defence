@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Exit
   - Tiles
+  - Tower
   layers:
   - Default
   - TransparentFX

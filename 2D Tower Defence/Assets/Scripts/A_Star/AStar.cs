@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public static class AStar
-{
+{   
     // Dictionary
     private static Dictionary<Point, Node> nodes; 
 
@@ -28,16 +28,13 @@ public static class AStar
         {
             CreateNodes();
         }
-
+        
         // Creates an open list for A* algorithm
         HashSet<Node> openList = new HashSet<Node>();
-
         // Creates a closed list for A* algorithm
         HashSet<Node> closeList = new HashSet<Node>();
-
         // Pushing final path to stack
         Stack<Node> finalPath = new Stack<Node>();
-
         // Finds the start node and creates a reference to it
         Node currentNode = nodes[start];
         // Add the start node to open list
@@ -80,7 +77,12 @@ public static class AStar
                                 continue;
                             }
 
-                            gCost = 14;
+                            /*
+                             * Code needs to be changed, but basically making the enemy to never take diagonal route.
+                             * Maybe keep the code as it is and later, when the game has more levels, adjust gCost through code.
+                             * In some levels enemy could take diagonal path?
+                             */
+                            gCost = 104;
                         }
 
                         // Add neighbours to open list
@@ -125,10 +127,8 @@ public static class AStar
                 return finalPath;
             }
         }
-
+        GameObject.Find("AStarDebug").GetComponent<AStarDebug>().DebugPath(openList, closeList, finalPath);
         return null;
-
-        //GameObject.Find("AStarDebug").GetComponent<AStarDebug>().DebugPath(openList, closeList, finalPath);
     }
 
     // Finding diagonal paths

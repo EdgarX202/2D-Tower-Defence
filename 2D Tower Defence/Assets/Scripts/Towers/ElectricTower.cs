@@ -15,7 +15,7 @@ public class ElectricTower : Tower
     private void Start()
     {
         base.SetRenderer();
-        
+
         // Type of the tower
         ElementType = Element.ELECTRIC;
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
@@ -11,7 +10,7 @@ public class LevelManager : Singleton<LevelManager>
     // Serialized fields
     [Header ("Tiles")]
     [SerializeField] private GameObject[] _tilePrefabs;
-    [Header ("Obstacles")]
+    [Header("Obstacles")]
     [SerializeField] private GameObject[] _obstacles;
     [Header ("Start & Exit points")]
     [SerializeField] private GameObject _doorInPrefab;
@@ -72,6 +71,8 @@ public class LevelManager : Singleton<LevelManager>
     public Dictionary<Point, TileScript> Tiles { get; set; }
     public EnemyEntrance Entrance { get; set; }
 
+    public bool isWalkable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,6 +120,8 @@ public class LevelManager : Singleton<LevelManager>
     // Spawn random obstacles on the map
     public void SpawnObstacles()
     {
+        
+
         // Random obstacle
         int randObs = random.Next(0, 2);
         // Random amount of obstacles
@@ -127,9 +130,9 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < randAmount; i++)
         {
             // Random positions
-            int randX = random.Next(1,15); 
-            int randY = random.Next(1,7); 
-            Vector3 obstaclePos = new Vector3(randX , randY, 0f);
+            int randX = random.Next(1, 15);
+            int randY = random.Next(1, 7);
+            Vector3 obstaclePos = new Vector3(randX, randY, 0f);
 
             // Instantiate obstacles
             Instantiate(_obstacles[randObs], obstaclePos, Quaternion.identity);
@@ -139,7 +142,7 @@ public class LevelManager : Singleton<LevelManager>
     // Placing tiles next to each other
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStartPos)
     {
-        // Parse to int to use indexer when creating a enw tile
+        // Parse to int to use indexer when creating a new tile
         int tileIndex = int.Parse(tileType);
         // Create a new tile
         TileScript newTile = Instantiate(_tilePrefabs[tileIndex].GetComponent<TileScript>());

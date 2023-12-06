@@ -61,19 +61,17 @@ public class Projectile : MonoBehaviour
     // Do damage and apply debuff if the enemy is hit
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If the enemy is hit
-        if(collision.tag == "Enemy")
-        {
-            if(target.gameObject == collision.gameObject)
+            if (collision.tag == "Enemy")
             {
-                // Do damage
-                target.TakeDamage(parent.Damage, elementType);
-                // Reset projectile
-                GameManager.Instance.Pool.ObjectReset(gameObject);
-                // Apply debuff
-                ApplyDebuff();
+                if (target.gameObject == collision.gameObject)
+                {
+                    // Do damage
+                    target.TakeDamage(parent.Damage, elementType);
+                    // Reset projectile
+                    GameManager.Instance.Pool.ObjectReset(gameObject);
+                    // Apply debuff
+                    ApplyDebuff();
+                }
             }
-        }
-
     }
 }

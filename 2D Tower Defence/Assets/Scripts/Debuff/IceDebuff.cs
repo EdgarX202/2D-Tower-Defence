@@ -31,7 +31,8 @@ public class IceDebuff : Debuff
     // Remove debuff, return to normal speed
     public override void Remove()
     {
-        target.EnemySpeed = target.MaxSpeed;
+        // BUGS ALL OVER THE PLACE
+        //target.EnemySpeed = target.MaxSpeed;
 
         base.Remove();
     }
