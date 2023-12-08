@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    TileScript tileScript;
-
     // Serialized fields
     [Header ("Tiles")]
     [SerializeField] private GameObject[] _tilePrefabs;
@@ -120,7 +118,7 @@ public class LevelManager : Singleton<LevelManager>
     // Spawn random obstacles on the map
     public void SpawnObstacles()
     {
-        
+
 
         // Random obstacle
         int randObs = random.Next(0, 2);
@@ -135,7 +133,9 @@ public class LevelManager : Singleton<LevelManager>
             Vector3 obstaclePos = new Vector3(randX, randY, 0f);
 
             // Instantiate obstacles
-            Instantiate(_obstacles[randObs], obstaclePos, Quaternion.identity);
+            GameObject obsBlock = Instantiate(_obstacles[randObs], obstaclePos, Quaternion.identity);
+            // Set the tile as transform parent to the obstacle (the obstacle will become a child)
+            obsBlock.transform.SetParent(transform);
         }
     }
 

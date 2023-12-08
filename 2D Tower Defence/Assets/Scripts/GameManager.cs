@@ -249,13 +249,26 @@ public class GameManager : Singleton<GameManager>
             // Increase health every 3 waves
             if(_wave % 3 == 0)
             {
-                _health += 5;
+                _health += 2;
             }
 
             // Add a spawned enemy to list to keep count for current wave
             activeEnemies.Add(enemy);
 
-            yield return new WaitForSeconds(2.5f);
+            // Spawn enemy every 2.5 or 2 seconds depending on which wave 
+            if (_wave <= 2)
+            {
+                yield return new WaitForSeconds(2.5f);
+            }
+            if (_wave >= 3)
+            {
+                yield return new WaitForSeconds(2.0f);
+            }
+            // Every 20 waves spawn every 1.5s
+            if (_wave % 10 == 0)
+            {
+                yield return new WaitForSeconds(1.5f);
+            }
         }
     }
 

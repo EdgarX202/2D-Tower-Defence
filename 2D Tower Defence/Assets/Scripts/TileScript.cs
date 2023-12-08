@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
+
     // Private
-    private LevelManager levelManager;
     private SpriteRenderer spriteRenderer;
     private Tower myTower;
     private int health = 15;
@@ -28,6 +28,9 @@ public class TileScript : MonoBehaviour
                                transform.position.y - (GetComponent<SpriteRenderer>().bounds.size.y / 2));
             }
     }
+
+    // Random
+    System.Random random = new System.Random();
 
     // Start is called before the first frame update
     void Start()
@@ -102,8 +105,7 @@ public class TileScript : MonoBehaviour
 
         if(AStar.GetPath(LevelManager.Instance.DoorIn, LevelManager.Instance.DoorOut) == null)
         {
-            // There is no path
-            levelManager.GetComponent<LevelManager>().isWalkable = false;
+            // There is no path then it is walkable
             Walkable = true;
             return;
         }

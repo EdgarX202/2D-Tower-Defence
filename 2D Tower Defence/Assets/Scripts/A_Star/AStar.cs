@@ -72,10 +72,10 @@ public static class AStar
                         }
                         else
                         {
-                            if(!ConnectedDiagonally(currentNode, nodes[neighbourPosition]))
-                            {
-                                continue;
-                            }
+                            //if(!ConnectedDiagonally(currentNode, nodes[neighbourPosition]))
+                            //{
+                            //    continue;
+                            //}
 
                             /*
                              * Code needs to be changed, but basically making the enemy to never take diagonal route.
@@ -83,6 +83,7 @@ public static class AStar
                              * In some levels enemy could take diagonal path?
                              */
                             gCost = 104;
+                            
                         }
 
                         // Add neighbours to open list
@@ -140,7 +141,7 @@ public static class AStar
         Point second = new Point(currentNode.GridPosition.X, currentNode.GridPosition.Y + direction.Y);
 
         // If the node is inside the grid and tile is not walkable
-        if(LevelManager.Instance.InsideBounds(first) && !LevelManager.Instance.Tiles[first].Walkable)
+        if (LevelManager.Instance.InsideBounds(first) && !LevelManager.Instance.Tiles[first].Walkable)
         {
             return false;
         }
