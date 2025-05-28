@@ -6,6 +6,5 @@ A 2D top-down tower defence game.</br>
 * Procedural map generation.
 * Christmas themed UI.
 * Pixel art created from scratch.</br>
-The game has a potential and can be further developed. Due to time constraints of the module, the game wasn't properly finished and there is a lot bugs that need fixing.</br>
 </br>
 <img src='https://github.com/EdgarX202/2D-Tower-Defence/blob/master/demo.gif' width='600'> </br>
