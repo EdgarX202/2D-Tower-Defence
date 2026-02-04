@@ -1,4 +1,8 @@
 # 2D-Tower-Defence
+
+<!-- [![.NET Multi-Project CI](https://github.com/EdgarX202/TaskForce-Lite/actions/workflows/build-and-test.yml/badge.svg?branch=master)](https://github.com/EdgarX202/TaskForce-Lite/actions/workflows/build-and-test.yml)
+![GitHub License](https://img.shields.io/github/license/EdgarX202/TaskForce-Lite) -->
+
 An early prototype built for Games Engineering module. </br>
 A 2D top-down tower defence game.</br> 
 * Functioning towers. Can buy/sell/upgrade/shoot. Debuffs are implemented but a little buggy.
