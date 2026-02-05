@@ -1,6 +1,6 @@
 # 2D-Tower-Defence
 
-![GitHub License](https://img.shields.io/github/license/EdgarX202/3D-Tower-Defence)
+![GitHub License](https://img.shields.io/github/license/EdgarX202/2D-Tower-Defence)
 
 An early prototype built for Games Engineering module. </br>
 A 2D top-down tower defence game.</br> 
